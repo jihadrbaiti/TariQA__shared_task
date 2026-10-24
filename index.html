@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TariQA 2027 · Moroccan Traffic Law QA Shared Task</title>
+<meta name="description" content="TariQA: a shared task on multiple-choice question answering over Moroccan traffic law (Law 52-05, the Highway Code) in Modern Standard Arabic, Moroccan Darija and English, hosted at the AbjadNLP 2027 Workshop.">
+<meta property="og:title" content="TariQA 2027 · Moroccan Traffic Law QA Shared Task">
+<meta property="og:description" content="Can your system pass the Moroccan driving-theory test, and the law exam behind it? Register for the TariQA shared task at AbjadNLP 2027.">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Marcellus&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+<script>
+  document.documentElement.classList.remove('no-js');
+  try { var t = localStorage.getItem('TariQA-theme'); if (t === 'dark' || t === 'light') { document.documentElement.setAttribute('data-theme', t); } } catch (e) {}
+</script>
+</head>
+<body>
+<!--
+  ORGANISER CHECKLIST (things to fill in before going live)
+  1. assets/js/config.js   -> registration, GitHub, Codabench, Slack, mailing-list links, contact e-mail
+  2. Section 05 (timeline) -> confirm the dates; all of them are tentative placeholders
+  3. Section 06 (organizers) -> names, affiliations, photos
+  4. Section 03 (data)     -> split sizes and licence once decided
+  5. Search this file for "TBA" and class="tba" for any remaining blanks
+-->
+<a class="skip-link" href="#overview">Skip to content</a>
+
+<!-- ======================================================================
+     SVG sprite: Moroccan road signs, traffic light, arch clip-path
+     ====================================================================== -->
+<svg xmlns="http://www.w3.org/2000/svg" class="sprite" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true" focusable="false">
+  <defs>
+    <clipPath id="archClip" clipPathUnits="objectBoundingBox">
+      <path d="M0.12,1 V0.8245 A0.5,0.5 0 1 1 0.88,0.8245 V1 Z"/>
+    </clipPath>
+  </defs>
+  <symbol id="sign-stop" viewBox="0 0 100 100">
+    <polygon points="29,3 71,3 97,29 97,71 71,97 29,97 3,71 3,29" fill="#D9252D" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round"/>
+    <text x="50" y="43" text-anchor="middle" font-family="Amiri, 'Noto Naskh Arabic', serif" font-size="19" font-weight="700" fill="#fff">قف</text>
+    <text x="50" y="73" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="700" fill="#fff" letter-spacing="1">STOP</text>
+  </symbol>
+  <symbol id="sign-yield" viewBox="0 0 100 100">
+    <path d="M50 93 L5 14 H95 Z" fill="#fff" stroke="#D9252D" stroke-width="10" stroke-linejoin="round"/>
+  </symbol>
+  <symbol id="sign-warning" viewBox="0 0 100 100">
+    <path d="M50 7 L95 87 H5 Z" fill="#fff" stroke="#D9252D" stroke-width="9" stroke-linejoin="round"/>
+    <rect x="45.5" y="34" width="9" height="27" rx="3" fill="#1a1a1a"/>
+    <circle cx="50" cy="71" r="5.5" fill="#1a1a1a"/>
+  </symbol>
+  <symbol id="sign-signals" viewBox="0 0 100 100">
+    <path d="M50 7 L95 87 H5 Z" fill="#fff" stroke="#D9252D" stroke-width="9" stroke-linejoin="round"/>
+    <rect x="41" y="36" width="18" height="42" rx="5" fill="#1a1a1a"/>
+    <circle cx="50" cy="45" r="4.6" fill="#FF3B30"/><circle cx="50" cy="57" r="4.6" fill="#FFC247"/><circle cx="50" cy="69" r="4.6" fill="#34E36B"/>
+  </symbol>
+  <symbol id="sign-bend" viewBox="0 0 100 100">
+    <path d="M50 7 L95 87 H5 Z" fill="#fff" stroke="#D9252D" stroke-width="9" stroke-linejoin="round"/>
+    <path d="M42 80 V66 Q42 56 50 52 Q58 48 58 42 V40" fill="none" stroke="#1a1a1a" stroke-width="7" stroke-linecap="round"/>
+    <polygon points="58,29 67,43 49,43" fill="#1a1a1a"/>
+  </symbol>
+  <symbol id="sign-bump" viewBox="0 0 100 100">
+    <path d="M50 7 L95 87 H5 Z" fill="#fff" stroke="#D9252D" stroke-width="9" stroke-linejoin="round"/>
+    <path d="M24 72 H35 C40 72 42 55 50 55 C58 55 60 72 65 72 H76 V78 H24 Z" fill="#1a1a1a"/>
+  </symbol>
+  <symbol id="sign-noentry" viewBox="0 0 100 100">
+    <circle cx="50" cy="50" r="46" fill="#D9252D" stroke="#fff" stroke-width="4"/>
+    <rect x="18" y="42" width="64" height="16" rx="3" fill="#fff"/>
+  </symbol>
+  <symbol id="sign-speed" viewBox="0 0 100 100">
+    <circle cx="50" cy="50" r="46" fill="#fff" stroke="#D9252D" stroke-width="9"/>
+    <text x="50" y="63" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="38" font-weight="700" fill="#1a1a1a">60</text>
+  </symbol>
+  <symbol id="sign-speed100" viewBox="0 0 100 100">
+    <circle cx="50" cy="50" r="46" fill="#fff" stroke="#D9252D" stroke-width="9"/>
+    <text x="50" y="62" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="33" font-weight="700" fill="#1a1a1a">100</text>
+  </symbol>
+  <symbol id="sign-blank" viewBox="0 0 100 100">
+    <circle cx="50" cy="50" r="46" fill="#fff" stroke="#D9252D" stroke-width="9"/>
+  </symbol>
+  <symbol id="sign-mandatory" viewBox="0 0 100 100">
+    <circle cx="50" cy="50" r="46" fill="#0D5CAB" stroke="#fff" stroke-width="4"/>
+    <path d="M50 20 L70 44 H58 V80 H42 V44 H30 Z" fill="#fff"/>
+  </symbol>
+  <symbol id="sign-turnright" viewBox="0 0 100 100">
+    <circle cx="50" cy="50" r="46" fill="#0D5CAB" stroke="#fff" stroke-width="4"/>
+    <path d="M22 44 H54 V30 L80 50 L54 70 V56 H22 Z" fill="#fff"/>
+  </symbol>
+  <symbol id="sign-roundabout" viewBox="0 0 100 100">
+    <circle cx="50" cy="50" r="46" fill="#0D5CAB" stroke="#fff" stroke-width="4"/>
+    <g fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round">
+      <path d="M57.52 29.33 A22 22 0 0 1 69.05 61"/>
+      <path d="M64.14 66.85 A22 22 0 0 1 30.95 61"/>
+      <path d="M28.33 53.82 A22 22 0 0 1 50 28"/>
+    </g>
+    <g fill="#fff">
+      <polygon points="65.05,67.9 74.25,64 63.85,58"/>
+      <polygon points="26.95,54.07 25.75,64 36.15,58"/>
+      <polygon points="58,28 50,22 50,34"/>
+    </g>
+  </symbol>
+  <symbol id="sign-noovertake" viewBox="0 0 100 100">
+    <circle cx="50" cy="50" r="46" fill="#fff" stroke="#D9252D" stroke-width="9"/>
+    <g fill="#D9252D">
+      <path d="M25 50 L28 38 H40 L43 50 Z"/>
+      <rect x="21" y="49" width="26" height="14" rx="3"/>
+      <rect x="23" y="62" width="5" height="7" rx="1.5"/><rect x="40" y="62" width="5" height="7" rx="1.5"/>
+    </g>
+    <path d="M28 48 L30 41 H38 L40 48 Z" fill="#fff"/>
+    <g fill="#1a1a1a">
+      <path d="M57 50 L60 38 H72 L75 50 Z"/>
+      <rect x="53" y="49" width="26" height="14" rx="3"/>
+      <rect x="55" y="62" width="5" height="7" rx="1.5"/><rect x="72" y="62" width="5" height="7" rx="1.5"/>
+    </g>
+    <path d="M60 48 L62 41 H70 L72 48 Z" fill="#fff"/>
+  </symbol>
+  <symbol id="sign-priority" viewBox="0 0 100 100">
+    <polygon points="50,3 97,50 50,97 3,50" fill="#fff" stroke="#cfcfcf" stroke-width="1"/>
+    <polygon points="50,17 83,50 50,83 17,50" fill="#F4B400"/>
+  </symbol>
+  <symbol id="sign-info" viewBox="0 0 100 100">
+    <rect x="4" y="4" width="92" height="92" rx="8" fill="#0D5CAB" stroke="#fff" stroke-width="4"/>
+    <circle cx="50" cy="30" r="7" fill="#fff"/>
+    <path d="M40 44 H56 V72 H64 V80 H36 V72 H44 V52 H40 Z" fill="#fff"/>
+  </symbol>
+  <symbol id="sign-parking" viewBox="0 0 100 100">
+    <rect x="4" y="4" width="92" height="92" rx="8" fill="#0D5CAB" stroke="#fff" stroke-width="4"/>
+    <path d="M34 22 H56 A17 17 0 0 1 56 56 H44 V78 H34 Z M44 32 V46 H55 A7 7 0 0 0 55 32 Z" fill="#fff" fill-rule="evenodd"/>
+  </symbol>
+  <symbol id="sign-noparking" viewBox="0 0 100 100">
+    <circle cx="50" cy="50" r="46" fill="#0D5CAB" stroke="#D9252D" stroke-width="9"/>
+    <path d="M22 78 L78 22" stroke="#D9252D" stroke-width="9" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="sign-cycle" viewBox="0 0 100 100">
+    <circle cx="50" cy="50" r="46" fill="#0D5CAB" stroke="#fff" stroke-width="4"/>
+    <g fill="none" stroke="#fff" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="32" cy="62" r="13"/><circle cx="68" cy="62" r="13"/>
+      <path d="M32 62 L44 40 H62 L68 62 M44 40 L52 62 H32 M58 32 L62 40 M54 32 H62"/>
+    </g>
+  </symbol>
+  <symbol id="sign-nouturn" viewBox="0 0 100 100">
+    <circle cx="50" cy="50" r="46" fill="#fff" stroke="#D9252D" stroke-width="9"/>
+    <path d="M38 78 V48 A12 12 0 0 1 62 48 V56" fill="none" stroke="#1a1a1a" stroke-width="7"/>
+    <polygon points="52,55 72,55 62,70" fill="#1a1a1a"/>
+    <path d="M22 78 L78 22" stroke="#D9252D" stroke-width="8"/>
+  </symbol>
+  <symbol id="traffic-light" viewBox="0 0 60 150">
+    <rect x="26" y="118" width="8" height="32" fill="#8b8f96"/>
+    <rect x="4" y="4" width="52" height="118" rx="12" fill="#1f1f23" stroke="#4a4a52" stroke-width="2"/>
+    <circle cx="30" cy="30" r="15" fill="#FF3B30"/><circle cx="30" cy="63" r="15" fill="#FFC247"/><circle cx="30" cy="96" r="15" fill="#34E36B"/>
+  </symbol>
+</svg>
+
+<!-- ======================================================================
+     Top ribbon + navigation
+     ====================================================================== -->
+<div class="topbar">
+  <div class="container">
+    <span class="pulse" aria-hidden="true"></span>
+    <span>Registration is open for TariQA 2027.</span>
+    <a data-link="register">Register your team</a>
+    <span aria-hidden="true">·</span>
+    <a data-link="slack">Join the Slack</a>
+  </div>
+</div>
+
+<nav class="nav" aria-label="Main">
+  <div class="container">
+    <a class="brand" href="#top" aria-label="TariQA home">
+      <svg aria-hidden="true"><use href="#traffic-light"/></svg>
+      <span>TariQA</span>
+      <span class="brand-ar" aria-hidden="true">طريق</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#overview">Overview</a></li>
+      <li><a href="#motivation">Motivation</a></li>
+      <li><a href="#data">Data</a></li>
+      <li><a href="#task">Task</a></li>
+      <li><a href="#timeline">Timeline</a></li>
+      <li><a href="#organizers">Organizers</a></li>
+      <li><a href="#participation">Participate</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a class="nav-cta" data-link="register">Register</a></li>
+    </ul>
+    <button class="icon-btn theme-toggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+    </button>
+    <button class="icon-btn nav-toggle" type="button" aria-label="Open menu" aria-expanded="false">
+      <span class="bars"><span></span><span></span><span></span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ======================================================================
+     Hero
+     ====================================================================== -->
+<header class="hero" id="top">
+  <div class="container">
+    <div class="hero-copy reveal">
+      <span class="eyebrow">
+        <svg class="ico" aria-hidden="true"><use href="#sign-signals"/></svg>
+        AbjadNLP 2027 Workshop · Shared Task
+      </span>
+      <h1>
+        <span class="h1-name">TariQA <span class="ar" lang="ar">طريق</span></span>
+        <span class="h1-sub">Moroccan Traffic Law Question Answering</span>
+      </h1>
+      <p class="lead">
+        A shared task on multiple-choice question answering over the Moroccan Highway Code
+        (Law 52-05), with questions in Modern Standard Arabic, Moroccan Darija and English.
+        Can your system pass the Moroccan driving-theory test, and the law exam behind it?
+      </p>
+      <div class="hero-ctas">
+        <a class="btn btn-primary" data-link="register"><svg aria-hidden="true"><use href="#sign-mandatory"/></svg> Register your team</a>
+        <a class="btn btn-outline on-dark" data-link="github"><svg aria-hidden="true"><use href="#sign-parking"/></svg> Data &amp; baselines</a>
+        <a class="btn btn-outline on-dark" data-link="codabench"><svg aria-hidden="true"><use href="#sign-speed100"/></svg> Codabench</a>
+        <a class="btn btn-outline on-dark" data-link="slack"><svg aria-hidden="true"><use href="#sign-info"/></svg> Slack</a>
+      </div>
+      <ul class="hero-meta">
+        <li><strong>5,147</strong> three-option questions</li>
+        <li><strong>3</strong> language varieties: MSA, Darija, English</li>
+        <li><strong>2</strong> tracks: closed-book and open</li>
+        <li>Workshop venue and dates: <span class="tba">TBA</span></li>
+      </ul>
+    </div>
+
+    <div class="hero-art reveal">
+      <svg class="hero-svg" viewBox="0 0 420 530" role="img" aria-labelledby="heroArtTitle">
+        <title id="heroArtTitle">A Moroccan horseshoe arch framing a road at dusk, with a traffic light, a stop sign and a minaret on the horizon</title>
+        <defs>
+          <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#171B5A"/>
+            <stop offset="0.5" stop-color="#4C3A8F"/>
+            <stop offset="0.78" stop-color="#D97E3C"/>
+            <stop offset="1" stop-color="#F3C25A"/>
+          </linearGradient>
+          <linearGradient id="roadGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#4A4B52"/><stop offset="1" stop-color="#26272C"/>
+          </linearGradient>
+          <radialGradient id="sunGlow" cx="0.5" cy="0.5" r="0.5">
+            <stop offset="0" stop-color="#FFE39A" stop-opacity="1"/>
+            <stop offset="0.6" stop-color="#FFC857" stop-opacity="0.55"/>
+            <stop offset="1" stop-color="#FFC857" stop-opacity="0"/>
+          </radialGradient>
+          <pattern id="zelHero" width="48" height="48" patternUnits="userSpaceOnUse">
+            <rect width="48" height="48" fill="#1F4E9A"/>
+            <g fill="#E9A632" stroke="#FBF3E3" stroke-width="1">
+              <polygon points="14,14 34,14 34,34 14,34"/><polygon points="24,9.9 38.1,24 24,38.1 9.9,24"/>
+            </g>
+            <g fill="#0E7A5A">
+              <polygon points="-6,-6 6,-6 6,6 -6,6"/><polygon points="0,-8.5 8.5,0 0,8.5 -8.5,0"/>
+              <polygon points="42,-6 54,-6 54,6 42,6"/><polygon points="48,-8.5 56.5,0 48,8.5 39.5,0"/>
+              <polygon points="-6,42 6,42 6,54 -6,54"/><polygon points="0,39.5 8.5,48 0,56.5 -8.5,48"/>
+              <polygon points="42,42 54,42 54,54 42,54"/><polygon points="48,39.5 56.5,48 48,56.5 39.5,48"/>
+            </g>
+            <g fill="#BD5A2C">
+              <polygon points="24,-3.5 27.5,0 24,3.5 20.5,0"/><polygon points="44.5,24 48,20.5 51.5,24 48,27.5"/>
+              <polygon points="24,44.5 27.5,48 24,51.5 20.5,48"/><polygon points="-3.5,24 0,20.5 3.5,24 0,27.5"/>
+            </g>
+          </pattern>
+          <clipPath id="archInner">
+            <path d="M76 470 V314.6 A164 164 0 1 1 344 314.6 V470 Z"/>
+          </clipPath>
+        </defs>
+
+        <!-- tiled plinth -->
+        <rect x="0" y="470" width="420" height="60" fill="url(#zelHero)"/>
+        <rect x="0" y="470" width="420" height="6" fill="#C9A03B"/>
+
+        <!-- the scene, clipped to the arch opening -->
+        <g clip-path="url(#archInner)">
+          <rect x="0" y="0" width="420" height="480" fill="url(#sky)"/>
+          <g fill="#fff" opacity="0.85">
+            <circle cx="120" cy="90" r="1.5"/><circle cx="160" cy="60" r="1"/><circle cx="250" cy="70" r="1.3"/>
+            <circle cx="300" cy="110" r="1"/><circle cx="200" cy="120" r="1.2"/><circle cx="90" cy="150" r="1"/><circle cx="330" cy="60" r="1.4"/>
+          </g>
+          <circle cx="282" cy="238" r="70" fill="url(#sunGlow)"/>
+          <circle cx="282" cy="238" r="30" fill="#FFD36B"/>
+          <!-- Atlas mountains -->
+          <path d="M40 304 L120 240 L160 275 L210 225 L255 268 L300 245 L340 290 L380 262 L420 304 Z" fill="#5A3B6B" opacity="0.92"/>
+          <!-- medina skyline, minaret and palm -->
+          <g fill="#2C1F3F">
+            <rect x="80" y="282" width="40" height="24"/>
+            <rect x="122" y="290" width="30" height="16"/>
+            <rect x="156" y="276" width="36" height="30"/>
+            <rect x="200" y="200" width="22" height="106"/>
+            <rect x="196" y="196" width="30" height="6"/>
+            <rect x="205" y="178" width="12" height="20"/>
+            <circle cx="211" cy="174" r="5"/>
+            <rect x="236" y="286" width="44" height="20"/>
+            <path d="M286 306 V290 A14 14 0 0 1 314 290 V306 Z"/>
+            <rect x="318" y="292" width="30" height="14"/>
+          </g>
+          <g fill="none" stroke="#2C1F3F" stroke-width="4" stroke-linecap="round">
+            <path d="M356 306 C357 285 358 268 360 250"/>
+            <path d="M360 250 C350 236 338 234 330 240"/>
+            <path d="M360 250 C352 238 356 226 368 220"/>
+            <path d="M360 250 C370 236 382 236 390 244"/>
+            <path d="M360 250 C372 250 380 258 382 268"/>
+            <path d="M360 250 C348 254 342 262 342 272"/>
+          </g>
+          <!-- ground and road -->
+          <rect x="0" y="304" width="420" height="180" fill="#C98F5A"/>
+          <rect x="0" y="304" width="420" height="5" fill="#A66F3F"/>
+          <polygon points="60,470 360,470 226,308 194,308" fill="url(#roadGrad)"/>
+          <polygon points="60,470 72,470 198,308 194,308" fill="#E8E8E8" opacity="0.8"/>
+          <polygon points="348,470 360,470 226,308 222,308" fill="#E8E8E8" opacity="0.8"/>
+          <g fill="#F5CF4B">
+            <polygon points="206,470 214,470 213.4,440 206.6,440"/>
+            <polygon points="207.2,420 212.8,420 212.4,398 207.6,398"/>
+            <polygon points="208,382 212,382 211.7,366 208.3,366"/>
+            <polygon points="208.6,354 211.4,354 211.2,342 208.8,342"/>
+            <polygon points="209.1,332 210.9,332 210.8,323 209.2,323"/>
+            <polygon points="209.5,316 210.5,316 210.4,310 209.6,310"/>
+          </g>
+          <!-- far signs -->
+          <rect x="258" y="352" width="3" height="22" fill="#9A9EA6"/>
+          <use href="#sign-bump" x="247" y="328" width="25" height="25"/>
+          <rect x="152" y="372" width="4" height="40" fill="#9A9EA6"/>
+          <use href="#sign-speed" x="138" y="342" width="32" height="32"/>
+          <!-- kilometre stone -->
+          <path d="M330 470 V444 A10 10 0 0 1 350 444 V470 Z" fill="#F3EAD9"/>
+          <path d="M330 452 V444 A10 10 0 0 1 350 444 V452 Z" fill="#D9252D"/>
+          <!-- traffic light (animated with CSS) -->
+          <g class="anim-tl">
+            <rect x="106" y="378" width="8" height="92" fill="#9A9EA6"/>
+            <rect x="88" y="296" width="44" height="86" rx="10" fill="#1D1D22" stroke="#50505A" stroke-width="2"/>
+            <circle class="tl-red" cx="110" cy="315" r="11"/>
+            <circle class="tl-amber" cx="110" cy="339" r="11"/>
+            <circle class="tl-green" cx="110" cy="363" r="11"/>
+          </g>
+          <!-- stop sign -->
+          <rect x="309" y="396" width="7" height="74" fill="#9A9EA6"/>
+          <use href="#sign-stop" x="282" y="340" width="62" height="62"/>
+        </g>
+
+        <!-- zellige arch frame -->
+        <path d="M60 470 V319.5 A180 180 0 1 1 360 319.5 V470 Z M76 470 V314.6 A164 164 0 1 1 344 314.6 V470 Z" fill="url(#zelHero)" fill-rule="evenodd"/>
+        <path d="M60 470 V319.5 A180 180 0 1 1 360 319.5 V470" fill="none" stroke="#C9A03B" stroke-width="3"/>
+        <path d="M76 470 V314.6 A164 164 0 1 1 344 314.6 V470" fill="none" stroke="#C9A03B" stroke-width="2.5"/>
+        <polygon points="210,22 222,34 210,46 198,34" fill="#E9A632" stroke="#FBF3E3" stroke-width="1.5"/>
+      </svg>
+    </div>
+  </div>
+</header>
+
+<!-- Scrolling road of Moroccan signs (decorative) -->
+<div class="sign-road" aria-hidden="true">
+  <div class="sign-track">
+    <div class="signpost"><svg><use href="#sign-stop"/></svg><span class="post"></span><span class="label">Stop · قف</span></div>
+    <div class="signpost"><svg><use href="#sign-yield"/></svg><span class="post"></span><span class="label">Give way</span></div>
+    <div class="signpost"><svg><use href="#sign-bump"/></svg><span class="post"></span><span class="label">Speed bump</span></div>
+    <div class="signpost"><svg><use href="#sign-speed"/></svg><span class="post"></span><span class="label">Limit</span></div>
+    <div class="signpost"><svg><use href="#sign-noentry"/></svg><span class="post"></span><span class="label">No entry</span></div>
+    <div class="signpost"><svg><use href="#sign-roundabout"/></svg><span class="post"></span><span class="label">Roundabout</span></div>
+    <div class="signpost"><svg><use href="#sign-noovertake"/></svg><span class="post"></span><span class="label">No overtaking</span></div>
+    <div class="signpost"><svg><use href="#sign-priority"/></svg><span class="post"></span><span class="label">Priority</span></div>
+    <div class="signpost"><svg><use href="#sign-warning"/></svg><span class="post"></span><span class="label">Caution</span></div>
+    <div class="signpost"><svg><use href="#sign-mandatory"/></svg><span class="post"></span><span class="label">Ahead only</span></div>
+    <div class="signpost"><svg><use href="#sign-signals"/></svg><span class="post"></span><span class="label">Signals</span></div>
+    <div class="signpost"><svg><use href="#sign-parking"/></svg><span class="post"></span><span class="label">Parking</span></div>
+    <div class="signpost"><svg><use href="#sign-turnright"/></svg><span class="post"></span><span class="label">Turn right</span></div>
+    <div class="signpost"><svg><use href="#sign-cycle"/></svg><span class="post"></span><span class="label">Cycles</span></div>
+    <div class="signpost"><svg><use href="#sign-bend"/></svg><span class="post"></span><span class="label">Bend</span></div>
+    <div class="signpost"><svg><use href="#sign-noparking"/></svg><span class="post"></span><span class="label">No parking</span></div>
+    <div class="signpost"><svg><use href="#sign-info"/></svg><span class="post"></span><span class="label">Info</span></div>
+    <div class="signpost"><svg><use href="#sign-nouturn"/></svg><span class="post"></span><span class="label">No U-turn</span></div>
+    <!-- duplicate set for a seamless loop -->
+    <div class="signpost"><svg><use href="#sign-stop"/></svg><span class="post"></span><span class="label">Stop · قف</span></div>
+    <div class="signpost"><svg><use href="#sign-yield"/></svg><span class="post"></span><span class="label">Give way</span></div>
+    <div class="signpost"><svg><use href="#sign-bump"/></svg><span class="post"></span><span class="label">Speed bump</span></div>
+    <div class="signpost"><svg><use href="#sign-speed"/></svg><span class="post"></span><span class="label">Limit</span></div>
+    <div class="signpost"><svg><use href="#sign-noentry"/></svg><span class="post"></span><span class="label">No entry</span></div>
+    <div class="signpost"><svg><use href="#sign-roundabout"/></svg><span class="post"></span><span class="label">Roundabout</span></div>
+    <div class="signpost"><svg><use href="#sign-noovertake"/></svg><span class="post"></span><span class="label">No overtaking</span></div>
+    <div class="signpost"><svg><use href="#sign-priority"/></svg><span class="post"></span><span class="label">Priority</span></div>
+    <div class="signpost"><svg><use href="#sign-warning"/></svg><span class="post"></span><span class="label">Caution</span></div>
+    <div class="signpost"><svg><use href="#sign-mandatory"/></svg><span class="post"></span><span class="label">Ahead only</span></div>
+    <div class="signpost"><svg><use href="#sign-signals"/></svg><span class="post"></span><span class="label">Signals</span></div>
+    <div class="signpost"><svg><use href="#sign-parking"/></svg><span class="post"></span><span class="label">Parking</span></div>
+    <div class="signpost"><svg><use href="#sign-turnright"/></svg><span class="post"></span><span class="label">Turn right</span></div>
+    <div class="signpost"><svg><use href="#sign-cycle"/></svg><span class="post"></span><span class="label">Cycles</span></div>
+    <div class="signpost"><svg><use href="#sign-bend"/></svg><span class="post"></span><span class="label">Bend</span></div>
+    <div class="signpost"><svg><use href="#sign-noparking"/></svg><span class="post"></span><span class="label">No parking</span></div>
+    <div class="signpost"><svg><use href="#sign-info"/></svg><span class="post"></span><span class="label">Info</span></div>
+    <div class="signpost"><svg><use href="#sign-nouturn"/></svg><span class="post"></span><span class="label">No U-turn</span></div>
+  </div>
+</div>
+
+<main>
+
+<!-- ======================================================================
+     01 Overview
+     ====================================================================== -->
+<section class="section" id="overview">
+  <div class="container">
+    <div class="section-head reveal">
+      <svg class="sign-icon" aria-hidden="true"><use href="#sign-info"/></svg>
+      <div>
+        <span class="num">01</span>
+        <h2>Overview of the Shared Task</h2>
+        <span class="ar-sub" lang="ar">نظرة عامة على المهمة المشتركة</span>
+      </div>
+    </div>
+    <div class="frieze reveal"></div>
+    <div class="grid grid-2 mt-2">
+      <div class="prose reveal">
+        <p>
+          <strong>TariQA</strong> (<span class="ar" lang="ar">طريق</span>, <em>tariq</em>: road) is a shared task on
+          answering questions about Moroccan traffic law, organized as part of the
+          <a data-link="workshop">AbjadNLP 2027 Workshop</a> on natural language processing for languages that use
+          the Arabic script. Given a question about driving rules, road signs, right of way, penalties, licence
+          points, vehicle documents or the articles of <strong>Law 52-05</strong> (the Moroccan Highway Code,
+          <em>Code de la Route</em>), a system must choose the single correct answer among three candidates.
+        </p>
+        <p>
+          Questions are written the way Moroccans actually ask them: in Modern Standard Arabic, in
+          Moroccan Darija (often with French loanwords such as <em>embrayage</em> or <em>compteur</em>), and in
+          English. The task therefore combines three challenges that are rarely evaluated together:
+          dialectal understanding, precise country-specific legal knowledge, and robustness to distractors
+          that are deliberately close to the correct answer.
+        </p>
+        <p>
+          The task is open to everyone: academic groups, industry teams and individual researchers.
+          Participation is free, and every team is invited to submit a system description paper to the
+          AbjadNLP 2027 proceedings.
+        </p>
+      </div>
+      <div class="card reveal">
+        <h3><svg class="card-icon" aria-hidden="true"><use href="#sign-priority"/></svg> At a glance</h3>
+        <ul class="checklist">
+          <li><strong>Task</strong>: three-option multiple-choice question answering (output A, B or C).</li>
+          <li><strong>Domain</strong>: Moroccan Highway Code and driving-school theory.</li>
+          <li><strong>Languages</strong>: Modern Standard Arabic, Moroccan Darija, English, in one shared test set.</li>
+          <li><strong>Tracks</strong>: Closed-book (parametric knowledge only) and Open (retrieval, tools, anything documented).</li>
+          <li><strong>Metrics</strong>: accuracy (primary), macro-F1 (secondary), per-variety breakdown.</li>
+          <li><strong>Submission</strong>: predictions on Codabench, papers on OpenReview.</li>
+          <li><strong>Cost</strong>: free to participate. One author of an accepted paper registers for the workshop.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="road-divider" aria-hidden="true"></div>
+
+<!-- ======================================================================
+     02 Motivation
+     ====================================================================== -->
+<section class="section alt" id="motivation">
+  <div class="container">
+    <div class="section-head reveal">
+      <svg class="sign-icon" aria-hidden="true"><use href="#sign-warning"/></svg>
+      <div>
+        <span class="num">02</span>
+        <h2>Motivation</h2>
+        <span class="ar-sub" lang="ar">الدوافع</span>
+      </div>
+    </div>
+    <div class="frieze reveal"></div>
+    <div class="grid grid-2 mt-2">
+      <div class="card reveal">
+        <h3><svg class="card-icon" aria-hidden="true"><use href="#sign-noovertake"/></svg> Road safety is a public concern</h3>
+        <p>Knowing the Highway Code is the first line of defence on Moroccan roads. Every year hundreds of thousands of candidates prepare for the theory part of the driving licence, and millions of drivers have questions about fines, points and procedures. Reliable, accessible answers in the languages people actually speak are a matter of safety, not convenience.</p>
+      </div>
+      <div class="card reveal">
+        <h3><svg class="card-icon" aria-hidden="true"><use href="#sign-noentry"/></svg> A domain that punishes hallucination</h3>
+        <p>Legal questions are factual and unforgiving: the right amount in dirhams, the right number of points, the right deadline, the right article. A fluent answer that is wrong is worse than no answer. The task is a clean testbed for faithfulness and precise knowledge in Arabic-script LLMs.</p>
+      </div>
+      <div class="card reveal">
+        <h3><svg class="card-icon" aria-hidden="true"><use href="#sign-roundabout"/></svg> Darija is low-resource and code-mixed</h3>
+        <p>Moroccan Darija has few benchmarks, and traffic talk is full of French and Spanish loanwords, Latin-script tokens and local idiom. Models that excel on Modern Standard Arabic routinely stumble on "<bdi class="ar nowrap" lang="ar">واش خاصني نوقف عند علامة STOP؟</bdi>". TariQA measures that gap on a concrete, useful task.</p>
+      </div>
+      <div class="card reveal">
+        <h3><svg class="card-icon" aria-hidden="true"><use href="#sign-mandatory"/></svg> Applications are immediate</h3>
+        <p>Driving-school tutors, citizen-facing legal assistants, chatbots for the licence theory exam, road-safety campaigns, and legal NLP for the broader Maghreb. Systems built for TariQA transfer directly to products people in Morocco would use tomorrow.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="road-divider" aria-hidden="true"></div>
+
+<!-- ======================================================================
+     03 Data
+     ====================================================================== -->
+<section class="section" id="data">
+  <div class="container">
+    <div class="section-head reveal">
+      <svg class="sign-icon" aria-hidden="true"><use href="#sign-parking"/></svg>
+      <div>
+        <span class="num">03</span>
+        <h2>Data Collection and Creation</h2>
+        <span class="ar-sub" lang="ar">جمع البيانات وإنشاؤها</span>
+      </div>
+    </div>
+    <div class="frieze reveal"></div>
+
+    <div class="prose mt-2 reveal">
+      <p>
+        The TariQA dataset contains <strong>5,147 multiple-choice questions</strong> about Moroccan traffic law.
+        Each question comes with three candidate answers (A, B, C) and exactly one gold label. Questions are
+        drawn from two complementary sources:
+      </p>
+      <ul>
+        <li><strong>Driving knowledge.</strong> Questions of the kind used in driving-school theory tests: road signs, right of way, overtaking, lights, speed, safe behaviour, vehicle documents and insurance.</li>
+        <li><strong>The legal code.</strong> Questions grounded in specific articles of Law 52-05 and its implementing texts: classes of violations, fines, point deductions, prison terms, deadlines and administrative procedures. About one question in five cites the article it is based on.</li>
+      </ul>
+      <p>
+        Distractors are plausible and lexically close to the correct option (same structure, different number,
+        duration or authority), so surface-level matching is not enough. Labels are near-balanced across A, B and C.
+      </p>
+    </div>
+
+    <!-- stats as road signs -->
+    <div class="stats reveal" aria-label="Dataset statistics">
+      <div class="stat">
+        <div class="figure sign-oct"><span>5,147</span></div>
+        <div class="label">multiple-choice questions</div>
+      </div>
+      <div class="stat">
+        <div class="figure sign-circle"><span>3</span></div>
+        <div class="label">answer options per question</div>
+      </div>
+      <div class="stat">
+        <div class="figure sign-square"><span class="stack"><span>MSA</span><span>Darija</span><span>English</span></span></div>
+        <div class="label">language varieties in one test set</div>
+      </div>
+      <div class="stat">
+        <div class="figure sign-diamond"><span>21%</span></div>
+        <div class="label">questions citing an article of Law 52-05</div>
+      </div>
+      <div class="stat">
+        <div class="figure sign-tri"><span>34%</span></div>
+        <div class="label">majority-class baseline accuracy</div>
+      </div>
+    </div>
+
+    <div class="grid grid-2 mt-2">
+      <div class="card reveal">
+        <h3>Language varieties <span class="muted small">(approximate)</span></h3>
+        <div class="bar" role="img" aria-label="Approximately 74 percent Modern Standard Arabic, 18 percent Darija, 8 percent English">
+          <span style="width:74%" class="b-msa">MSA 74%</span><span style="width:18%" class="b-darija">Darija 18%</span><span style="width:8%" class="b-en">EN</span>
+        </div>
+        <p class="small muted mb-0">Variety labels are derived from lexical markers and will be released with the data so that results can be reported per variety.</p>
+      </div>
+      <div class="card reveal">
+        <h3>Gold answer distribution</h3>
+        <div class="bar" role="img" aria-label="A 33.9 percent, B 34.3 percent, C 31.8 percent">
+          <span style="width:33.9%" class="b-a">A 33.9%</span><span style="width:34.3%" class="b-b">B 34.3%</span><span style="width:31.8%" class="b-c">C 31.8%</span>
+        </div>
+        <p class="small muted mb-0">Random guessing scores 33.3% accuracy and always answering B scores 34.3%, so there is little to gain from label priors.</p>
+      </div>
+    </div>
+
+    <h3 class="mt-3 reveal">Examples</h3>
+    <div class="grid grid-2">
+      <article class="mcq reveal" dir="rtl" lang="ar">
+        <span class="tag" dir="ltr">Modern Standard Arabic</span>
+        <p class="q">أولوية المرور عند تقاطع بدون إشارات؟</p>
+        <ul class="opts">
+          <li class="opt correct"><span class="k">A</span><span>السيارات من اليمين</span></li>
+          <li class="opt"><span class="k">B</span><span>السيارات من اليسار</span></li>
+          <li class="opt"><span class="k">C</span><span>السيارات الكبيرة فقط</span></li>
+        </ul>
+      </article>
+      <article class="mcq reveal" dir="rtl" lang="ar">
+        <span class="tag" dir="ltr">Moroccan Darija</span>
+        <p class="q">فالمدار شكون عندو الأولوية؟</p>
+        <ul class="opts">
+          <li class="opt"><span class="k">A</span><span>غالبًا اللي كاين وسط المدار.</span></li>
+          <li class="opt"><span class="k">B</span><span>غالبًا اللي جاي من جهة اليسر.</span></li>
+          <li class="opt correct"><span class="k">C</span><span>غالبًا اللي داخل للمدار.</span></li>
+        </ul>
+      </article>
+      <article class="mcq reveal" dir="rtl" lang="ar">
+        <span class="tag" dir="ltr">Legal code · MSA</span>
+        <p class="q">تعتبر مخالفة من الدرجة الثانية إذا تم تجاوز السرعة القصوى المسموح بها بمدى يتراوح بين:</p>
+        <ul class="opts">
+          <li class="opt"><span class="k">A</span><span>عشرة (10) إلى أقل من عشرين (20) كلم في الساعة</span></li>
+          <li class="opt"><span class="k">B</span><span>ثلاثين (30) إلى أقل من أربعين (40) كلم في الساعة</span></li>
+          <li class="opt correct"><span class="k">C</span><span>عشرين (20) إلى أقل من ثلاثين (30) كلم في الساعة</span></li>
+        </ul>
+      </article>
+      <article class="mcq reveal" dir="ltr" lang="en">
+        <span class="tag">English</span>
+        <p class="q">What is the point deduction for a driver who fails to respect a stop sign or a red light signal?</p>
+        <ul class="opts">
+          <li class="opt"><span class="k">A</span><span>6 points</span></li>
+          <li class="opt correct"><span class="k">B</span><span>4 points</span></li>
+          <li class="opt"><span class="k">C</span><span>2 points</span></li>
+        </ul>
+      </article>
+    </div>
+
+    <div class="grid grid-2 mt-3">
+      <div class="reveal">
+        <h3>Format and splits</h3>
+        <p>Data is distributed as UTF-8 CSV files with one question per row. The <code>answer</code> column is withheld in the test set.</p>
+<pre><code>id,question,A,B,C,answer
+TQA-00001,<bdi>أولوية المرور عند تقاطع بدون إشارات؟</bdi>,<bdi>السيارات من اليمين</bdi>,<bdi>السيارات من اليسار</bdi>,<bdi>السيارات الكبيرة فقط</bdi>,A
+TQA-00002,<bdi>واش يمكن التجاوز من اليمين؟</bdi>,<bdi>لا</bdi>,<bdi>نعم</bdi>,"<bdi>نعم، إلا كانت الطريق واسعة</bdi>",A</code></pre>
+        <table class="tbl mt-1">
+          <thead><tr><th>Split</th><th>Size</th><th>Labels</th><th>Release</th></tr></thead>
+          <tbody>
+            <tr><td>Train</td><td><span class="tba">TBA</span> (about 70%)</td><td>public</td><td>with the training data</td></tr>
+            <tr><td>Development</td><td><span class="tba">TBA</span> (about 10%)</td><td>public</td><td>with the training data</td></tr>
+            <tr><td>Test</td><td><span class="tba">TBA</span> (about 20%)</td><td>withheld</td><td>evaluation phase</td></tr>
+          </tbody>
+        </table>
+        <p class="small muted mt-1">Near-duplicate questions are grouped before splitting so that no test question has a paraphrase in the training data. Licence: <span class="tba">TBA</span>. A 20-question <a data-link="sample">sample file</a> shows the exact format.</p>
+      </div>
+
+      <!-- Interactive sample test -->
+      <div class="quiz-wrap reveal">
+        <h3>Take the test <span class="ar muted" lang="ar">جرّب بنفسك</span></h3>
+        <p class="small muted">Twelve real questions from the dataset. Pick an answer and watch the light.</p>
+        <div class="quiz card" id="quiz">
+          <div class="quiz-main">
+            <div class="quiz-top">
+              <span class="tag" id="quiz-tag">MSA</span>
+              <span class="quiz-progress" id="quiz-progress"></span>
+            </div>
+            <p class="q" id="quiz-q"></p>
+            <ul class="opts" id="quiz-opts"></ul>
+            <div class="quiz-actions" dir="ltr">
+              <button class="btn btn-go btn-sm" type="button" id="quiz-next">Next question</button>
+              <button class="btn btn-outline btn-sm" type="button" id="quiz-restart">Restart</button>
+              <span class="quiz-feedback" id="quiz-feedback" aria-live="polite"></span>
+            </div>
+          </div>
+          <div class="quiz-light is-amber" id="quiz-light" aria-hidden="true">
+            <svg viewBox="0 0 60 150">
+              <rect x="26" y="118" width="8" height="32" fill="#8b8f96"/>
+              <rect x="4" y="4" width="52" height="118" rx="12" fill="#1f1f23" stroke="#4a4a52" stroke-width="2"/>
+              <circle class="lamp red" cx="30" cy="30" r="15"/>
+              <circle class="lamp amber" cx="30" cy="63" r="15"/>
+              <circle class="lamp green" cx="30" cy="96" r="15"/>
+            </svg>
+            <div class="quiz-score" id="quiz-score">0 / 0</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="road-divider" aria-hidden="true"></div>
+
+<!-- ======================================================================
+     04 Task description + evaluation
+     ====================================================================== -->
+<section class="section alt" id="task">
+  <div class="container">
+    <div class="section-head reveal">
+      <svg class="sign-icon" aria-hidden="true"><use href="#sign-mandatory"/></svg>
+      <div>
+        <span class="num">04</span>
+        <h2>Task Description</h2>
+        <span class="ar-sub" lang="ar">وصف المهمة</span>
+      </div>
+    </div>
+    <div class="frieze reveal"></div>
+
+    <div class="grid grid-2 mt-2">
+      <div class="card io-card reveal">
+        <h3>Input and output</h3>
+        <div class="io">
+          <div class="io-in">
+            <span class="io-label">Input</span>
+            <code>question</code> <code>A</code> <code>B</code> <code>C</code>
+            <p class="small muted mb-0">A question and its three candidate answers, in MSA, Darija or English.</p>
+          </div>
+          <div class="io-arrow" aria-hidden="true"><svg><use href="#sign-turnright"/></svg></div>
+          <div class="io-out">
+            <span class="io-label">Output</span>
+            <code>answer ∈ {A, B, C}</code>
+            <p class="small muted mb-0">Exactly one letter per question. Empty or invalid predictions count as wrong.</p>
+          </div>
+        </div>
+      </div>
+      <div class="card reveal">
+        <h3>Rules in brief</h3>
+        <ul class="checklist">
+          <li>Any model, architecture or prompting strategy is allowed, in both tracks.</li>
+          <li>The test set must not be used for training, tuning or model selection, and must not be annotated by hand.</li>
+          <li>Teams enter one or both tracks and declare the track with each run.</li>
+          <li>Every resource used (models, corpora, tools, APIs) is reported in the system description paper.</li>
+          <li>Up to three official test runs per team and track. The last valid run is the official one.</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 class="mt-3 reveal">Tracks</h3>
+    <div class="grid grid-2">
+      <div class="card track reveal">
+        <svg class="track-icon" aria-hidden="true"><use href="#sign-noentry"/></svg>
+        <div>
+          <span class="num">Track 1</span>
+          <h3>Closed-book</h3>
+          <p>Systems answer from what they already know. Fine-tuning on the official training data and any pre-trained model are allowed, but <strong>no external text may be consulted at inference time</strong>: no retrieval over the Highway Code, no web search, no tools. The track measures how much Moroccan traffic law a model has actually internalized.</p>
+        </div>
+      </div>
+      <div class="card track reveal">
+        <svg class="track-icon" aria-hidden="true"><use href="#sign-roundabout"/></svg>
+        <div>
+          <span class="num">Track 2</span>
+          <h3>Open</h3>
+          <p>Anything goes, as long as it is documented: retrieval-augmented generation over Law 52-05 and its decrees, tool use, ensembles, proprietary APIs, additional training data, agents. The track measures the best achievable performance and encourages creative use of the legal sources.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid grid-2 mt-3">
+      <div class="reveal">
+        <h3>Evaluation</h3>
+        <table class="tbl">
+          <thead><tr><th>Metric</th><th>Role</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Accuracy</strong></td><td>Primary, used for ranking</td><td>Share of test questions whose predicted letter equals the gold letter.</td></tr>
+            <tr><td><strong>Macro-F1</strong></td><td>Secondary, tie-breaker</td><td>Computed over the three labels A, B, C.</td></tr>
+            <tr><td><strong>Per-variety accuracy</strong></td><td>Reported</td><td>MSA, Darija and English subsets, and driving-knowledge versus article-grounded questions.</td></tr>
+          </tbody>
+        </table>
+        <p class="small muted mt-1">The official scorer will be released in the GitHub repository together with the training data, so that development scores are directly comparable with the leaderboard.</p>
+      </div>
+      <div class="reveal">
+        <h3>Baselines</h3>
+        <table class="tbl">
+          <thead><tr><th>System</th><th>Accuracy</th></tr></thead>
+          <tbody>
+            <tr><td>Random choice</td><td>33.3%</td></tr>
+            <tr><td>Majority class (always B)</td><td>34.3%</td></tr>
+            <tr><td>Zero-shot open-weight LLM (organizers' baseline)</td><td><span class="tba">TBA</span></td></tr>
+            <tr><td>Fine-tuned encoder (organizers' baseline)</td><td><span class="tba">TBA</span></td></tr>
+          </tbody>
+        </table>
+        <p class="small muted mt-1">Baseline code and development-set scores will be published with the data release.</p>
+      </div>
+    </div>
+
+    <div class="card mt-3 reveal">
+      <h3>Submission format</h3>
+      <p>Upload a zip archive to Codabench containing a single file named <code>predictions.csv</code> with one row per test question, in any order:</p>
+<pre><code>id,answer
+TQA-00001,A
+TQA-00002,C
+TQA-00003,B</code></pre>
+      <p class="mb-0 small muted">A <a data-link="sampleSubmission">sample submission</a> and a validation script are available in the repository. Full instructions, including run limits and phases, are in the <a href="guidelines.html">participation guidelines</a>.</p>
+    </div>
+  </div>
+</section>
+
+<div class="road-divider" aria-hidden="true"></div>
+
+<!-- ======================================================================
+     05 Timeline
+     ====================================================================== -->
+<section class="section" id="timeline">
+  <div class="container">
+    <div class="section-head reveal">
+      <svg class="sign-icon" aria-hidden="true"><use href="#sign-stop"/></svg>
+      <div>
+        <span class="num">05</span>
+        <h2>Tentative Timeline</h2>
+        <span class="ar-sub" lang="ar">الجدول الزمني المؤقت</span>
+      </div>
+    </div>
+    <div class="frieze reveal"></div>
+    <p class="prose mt-2 reveal">All deadlines are 23:59 <strong>anywhere on Earth (UTC-12)</strong>. Dates are tentative until the AbjadNLP 2027 workshop dates are confirmed; changes will be announced on the mailing list and Slack.</p>
+
+    <ol class="road reveal">
+      <li class="milestone">
+        <div class="marker"><span>1</span></div>
+        <div class="card"><div class="date">23 October 2026</div><h3>Registration opens</h3><p>Register your team to receive the data-release announcement and Slack invitation.</p></div>
+      </li>
+      <li class="milestone">
+        <div class="marker"><span>2</span></div>
+        <div class="card"><div class="date">1 December 2026</div><h3>Training and development data</h3><p>Labelled train and dev splits, baselines and the official scorer. The Codabench development phase opens.</p></div>
+      </li>
+      <li class="milestone">
+        <div class="marker"><span>3</span></div>
+        <div class="card"><div class="date">15 January 2027</div><h3>Test data release</h3><p>Unlabelled test set. The evaluation phase opens on Codabench.</p></div>
+      </li>
+      <li class="milestone">
+        <div class="marker"><span>4</span></div>
+        <div class="card"><div class="date">22 January 2027</div><h3>Test submissions close</h3><p>Up to three runs per team and track. Only runs made inside the evaluation window count as official.</p></div>
+      </li>
+      <li class="milestone">
+        <div class="marker"><span>5</span></div>
+        <div class="card"><div class="date">29 January 2027</div><h3>Results announced</h3><p>Official leaderboard per track, with per-variety breakdown.</p></div>
+      </li>
+      <li class="milestone">
+        <div class="marker"><span>6</span></div>
+        <div class="card"><div class="date">12 February 2027</div><h3>System description papers due</h3><p>Up to 4 pages plus unlimited references and appendices, through OpenReview.</p></div>
+      </li>
+      <li class="milestone">
+        <div class="marker"><span>7</span></div>
+        <div class="card"><div class="date">5 March 2027</div><h3>Notification of acceptance</h3><p>Reviews by fellow participants, checked by an organizer.</p></div>
+      </li>
+      <li class="milestone">
+        <div class="marker"><span>8</span></div>
+        <div class="card"><div class="date">19 March 2027</div><h3>Camera-ready papers due</h3><p>Final versions for the AbjadNLP 2027 proceedings.</p></div>
+      </li>
+      <li class="milestone">
+        <div class="marker finish"><span>9</span></div>
+        <div class="card"><div class="date"><span class="tba">Date TBA</span> · 2027</div><h3>AbjadNLP 2027 Workshop</h3><p>Presentation of the task overview and the participating systems. Venue <span class="tba">TBA</span>.</p></div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<div class="road-divider" aria-hidden="true"></div>
+
+<!-- ======================================================================
+     06 Organizers
+     ====================================================================== -->
+<section class="section alt" id="organizers">
+  <div class="container">
+    <div class="section-head reveal">
+      <svg class="sign-icon" aria-hidden="true"><use href="#sign-noovertake"/></svg>
+      <div>
+        <span class="num">06</span>
+        <h2>Organizers' Details</h2>
+        <span class="ar-sub" lang="ar">اللجنة المنظمة</span>
+      </div>
+    </div>
+    <div class="frieze reveal"></div>
+    <div class="people mt-2" id="organizers-list" data-src="assets/organizers.csv" aria-live="polite">
+      <p class="people-msg">Loading organizers&hellip;</p>
+    </div>
+    <noscript><p class="people-msg">The organizer list needs JavaScript.</p></noscript>
+    <!-- Organizer cards are generated from assets/organizers.csv by assets/js/main.js.
+         Columns: first_name,last_name,affiliation,role,orcid,linkedin,google_scholar,research_gate,email,profile_picture_path
+         Photos go in assets/img/; give the path relative to the site, e.g. assets/img/name.jpg. -->
+  </div>
+</section>
+
+<div class="road-divider" aria-hidden="true"></div>
+
+<!-- ======================================================================
+     07 Participation
+     ====================================================================== -->
+<section class="section" id="participation">
+  <div class="container">
+    <div class="section-head reveal">
+      <svg class="sign-icon" aria-hidden="true"><use href="#sign-roundabout"/></svg>
+      <div>
+        <span class="num">07</span>
+        <h2>Participation Guidelines</h2>
+        <span class="ar-sub" lang="ar">شروط المشاركة</span>
+      </div>
+    </div>
+    <div class="frieze reveal"></div>
+    <div class="grid grid-3 mt-2">
+      <div class="card step reveal">
+        <div class="step-sign"><svg aria-hidden="true"><use href="#sign-blank"/></svg><span>1</span></div>
+        <h3>Register</h3>
+        <p>Fill in the registration form with your team name, members and affiliations. You will receive the data-release announcement and the Slack invitation.</p>
+      </div>
+      <div class="card step reveal">
+        <div class="step-sign"><svg aria-hidden="true"><use href="#sign-blank"/></svg><span>2</span></div>
+        <h3>Build and submit</h3>
+        <p>Download the data, develop your system, and upload predictions to Codabench: unlimited runs on the development set, up to three official runs on the test set.</p>
+      </div>
+      <div class="card step reveal">
+        <div class="step-sign"><svg aria-hidden="true"><use href="#sign-blank"/></svg><span>3</span></div>
+        <h3>Write it up</h3>
+        <p>Describe your system in a 4-page paper through OpenReview, review two other submissions, and present your work at AbjadNLP 2027.</p>
+      </div>
+    </div>
+    <div class="cta-row mt-2 reveal">
+      <a class="btn btn-blue" href="guidelines.html"><svg aria-hidden="true"><use href="#sign-info"/></svg> Full participation guidelines</a>
+      <a class="btn btn-outline" href="paper.html"><svg aria-hidden="true"><use href="#sign-priority"/></svg> Paper submission guidelines</a>
+      <a class="btn btn-primary" data-link="register"><svg aria-hidden="true"><use href="#sign-mandatory"/></svg> Register now</a>
+    </div>
+  </div>
+</section>
+
+<div class="road-divider" aria-hidden="true"></div>
+
+<!-- ======================================================================
+     Logistics, updates, announcements, policy
+     ====================================================================== -->
+<section class="section alt" id="contact">
+  <div class="container">
+    <div class="section-head reveal">
+      <svg class="sign-icon" aria-hidden="true"><use href="#sign-signals"/></svg>
+      <div>
+        <span class="num">08</span>
+        <h2>Logistics and Support</h2>
+        <span class="ar-sub" lang="ar">الدعم والتواصل</span>
+      </div>
+    </div>
+    <div class="frieze reveal"></div>
+    <div class="grid grid-3 mt-2">
+      <div class="card reveal">
+        <h3><svg class="card-icon" aria-hidden="true"><use href="#sign-info"/></svg> Website and data</h3>
+        <p>This site is hosted on GitHub Pages. Data, baselines, the scorer and the submission validator live in the official repository.</p>
+        <a class="btn btn-outline btn-sm" data-link="github">GitHub repository</a>
+      </div>
+      <div class="card reveal">
+        <h3><svg class="card-icon" aria-hidden="true"><use href="#sign-speed100"/></svg> Submission system</h3>
+        <p>Predictions are evaluated on Codabench, which hosts the development and evaluation phases and the public leaderboard.</p>
+        <a class="btn btn-outline btn-sm" data-link="codabench">Codabench competition</a>
+      </div>
+      <div class="card reveal">
+        <h3><svg class="card-icon" aria-hidden="true"><use href="#sign-signals"/></svg> Communication</h3>
+        <p>Questions, announcements and support go through the Slack workspace, the mailing list and GitHub issues.</p>
+        <div class="btn-stack">
+          <a class="btn btn-outline btn-sm" data-link="slack">Slack invite</a>
+          <a class="btn btn-outline btn-sm" data-link="mailing">Mailing list</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid grid-2 mt-3">
+      <div class="reveal">
+        <h3>Stay updated</h3>
+        <p>Watch the <a data-link="github">GitHub repository</a> for releases and join the <a data-link="slack">Slack community</a> for day-to-day discussion. For anything private, write to the organizers at <a data-email></a>.</p>
+        <h3 class="mt-2">Anti-harassment policy</h3>
+        <p>TariQA and the AbjadNLP Workshop adopt the <a data-link="antiHarassment">ACL Anti-Harassment Policy</a>. Participants are encouraged to contact any organizer with concerns or questions, and to help us keep the task welcoming to everyone.</p>
+      </div>
+      <div class="reveal">
+        <h3>Announcements and updates</h3>
+        <ul class="news">
+          <li><span class="date">23 Oct 2026</span> Shared task website launched. Registration is open and the Slack workspace will be announced shortly.</li>
+          <li><span class="date">Coming</span> Training and development data, baselines and the official scorer, on 1 December 2026 (tentative).</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ======================================================================
+     Footer
+     ====================================================================== -->
+<footer class="footer">
+  <div class="container">
+    <div class="cols">
+      <div>
+        <div class="brand brand-foot">
+          <svg aria-hidden="true"><use href="#traffic-light"/></svg>
+          <span>TariQA</span>
+          <span class="brand-ar" aria-hidden="true">طريق</span>
+        </div>
+        <p>Moroccan Traffic Law Question Answering Shared Task, part of the AbjadNLP 2027 Workshop on NLP for Languages Using Arabic Script.</p>
+      </div>
+      <div>
+        <h4>Task</h4>
+        <ul class="foot-links">
+          <li><a href="#overview">Overview</a></li>
+          <li><a href="#data">Data</a></li>
+          <li><a href="#task">Task and evaluation</a></li>
+          <li><a href="#timeline">Timeline</a></li>
+          <li><a href="guidelines.html">Participation guidelines</a></li>
+          <li><a href="paper.html">Paper guidelines</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Links</h4>
+        <ul class="foot-links">
+          <li><a data-link="register">Registration</a></li>
+          <li><a data-link="github">GitHub</a></li>
+          <li><a data-link="codabench">Codabench</a></li>
+          <li><a data-link="slack">Slack</a></li>
+          <li><a data-link="workshop">AbjadNLP Workshop</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="tiny">
+      <span>© <span data-year>2026</span> TariQA organizers. Page maintained by <span class="tba">maintainer</span>, hosted on GitHub Pages.</span>
+      <span>Road signs and zellige drawn in SVG for this site.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/config.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>

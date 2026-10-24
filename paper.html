@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Paper Submission Guidelines · TariqQA 2027</title>
+<meta name="description" content="How to write and submit a system description paper for TariqQA, the Moroccan traffic law question answering shared task at AbjadNLP 2027.">
+<link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Marcellus&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+<script>
+  document.documentElement.classList.remove('no-js');
+  try { var t = localStorage.getItem('tariqqa-theme'); if (t === 'dark' || t === 'light') { document.documentElement.setAttribute('data-theme', t); } } catch (e) {}
+</script>
+</head>
+<body class="subpage">
+<a class="skip-link" href="#content">Skip to content</a>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true" focusable="false">
+  <symbol id="sign-stop" viewBox="0 0 100 100">
+    <polygon points="29,3 71,3 97,29 97,71 71,97 29,97 3,71 3,29" fill="#D9252D" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round"/>
+    <text x="50" y="43" text-anchor="middle" font-family="Amiri, 'Noto Naskh Arabic', serif" font-size="19" font-weight="700" fill="#fff">قف</text>
+    <text x="50" y="73" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="700" fill="#fff" letter-spacing="1">STOP</text>
+  </symbol>
+  <symbol id="sign-warning" viewBox="0 0 100 100">
+    <path d="M50 7 L95 87 H5 Z" fill="#fff" stroke="#D9252D" stroke-width="9" stroke-linejoin="round"/>
+    <rect x="45.5" y="34" width="9" height="27" rx="3" fill="#1a1a1a"/>
+    <circle cx="50" cy="71" r="5.5" fill="#1a1a1a"/>
+  </symbol>
+  <symbol id="sign-noentry" viewBox="0 0 100 100">
+    <circle cx="50" cy="50" r="46" fill="#D9252D" stroke="#fff" stroke-width="4"/>
+    <rect x="18" y="42" width="64" height="16" rx="3" fill="#fff"/>
+  </symbol>
+  <symbol id="sign-mandatory" viewBox="0 0 100 100">
+    <circle cx="50" cy="50" r="46" fill="#0D5CAB" stroke="#fff" stroke-width="4"/>
+    <path d="M50 20 L70 44 H58 V80 H42 V44 H30 Z" fill="#fff"/>
+  </symbol>
+  <symbol id="sign-priority" viewBox="0 0 100 100">
+    <polygon points="50,3 97,50 50,97 3,50" fill="#fff" stroke="#cfcfcf" stroke-width="1"/>
+    <polygon points="50,17 83,50 50,83 17,50" fill="#F4B400"/>
+  </symbol>
+  <symbol id="sign-info" viewBox="0 0 100 100">
+    <rect x="4" y="4" width="92" height="92" rx="8" fill="#0D5CAB" stroke="#fff" stroke-width="4"/>
+    <circle cx="50" cy="30" r="7" fill="#fff"/>
+    <path d="M40 44 H56 V72 H64 V80 H36 V72 H44 V52 H40 Z" fill="#fff"/>
+  </symbol>
+  <symbol id="sign-parking" viewBox="0 0 100 100">
+    <rect x="4" y="4" width="92" height="92" rx="8" fill="#0D5CAB" stroke="#fff" stroke-width="4"/>
+    <path d="M34 22 H56 A17 17 0 0 1 56 56 H44 V78 H34 Z M44 32 V46 H55 A7 7 0 0 0 55 32 Z" fill="#fff" fill-rule="evenodd"/>
+  </symbol>
+  <symbol id="sign-nouturn" viewBox="0 0 100 100">
+    <circle cx="50" cy="50" r="46" fill="#fff" stroke="#D9252D" stroke-width="9"/>
+    <path d="M38 78 V48 A12 12 0 0 1 62 48 V56" fill="none" stroke="#1a1a1a" stroke-width="7"/>
+    <polygon points="52,55 72,55 62,70" fill="#1a1a1a"/>
+    <path d="M22 78 L78 22" stroke="#D9252D" stroke-width="8"/>
+  </symbol>
+  <symbol id="sign-signals" viewBox="0 0 100 100">
+    <path d="M50 7 L95 87 H5 Z" fill="#fff" stroke="#D9252D" stroke-width="9" stroke-linejoin="round"/>
+    <rect x="41" y="36" width="18" height="42" rx="5" fill="#1a1a1a"/>
+    <circle cx="50" cy="45" r="4.6" fill="#FF3B30"/><circle cx="50" cy="57" r="4.6" fill="#FFC247"/><circle cx="50" cy="69" r="4.6" fill="#34E36B"/>
+  </symbol>
+  <symbol id="traffic-light" viewBox="0 0 60 150">
+    <rect x="26" y="118" width="8" height="32" fill="#8b8f96"/>
+    <rect x="4" y="4" width="52" height="118" rx="12" fill="#1f1f23" stroke="#4a4a52" stroke-width="2"/>
+    <circle cx="30" cy="30" r="15" fill="#FF3B30"/><circle cx="30" cy="63" r="15" fill="#FFC247"/><circle cx="30" cy="96" r="15" fill="#34E36B"/>
+  </symbol>
+</svg>
+
+<div class="topbar">
+  <div class="container">
+    <span class="pulse" aria-hidden="true"></span>
+    <span>Registration is open for TariqQA 2027.</span>
+    <a data-link="register">Register your team</a>
+  </div>
+</div>
+
+<nav class="nav" aria-label="Main">
+  <div class="container">
+    <a class="brand" href="index.html" aria-label="TariqQA home">
+      <svg aria-hidden="true"><use href="#traffic-light"/></svg>
+      <span>TariqQA</span>
+      <span class="brand-ar" aria-hidden="true">طريق</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="index.html#data">Data</a></li>
+      <li><a href="index.html#task">Task</a></li>
+      <li><a href="index.html#timeline">Timeline</a></li>
+      <li><a href="guidelines.html">Participation</a></li>
+      <li><a href="paper.html" class="active">Papers</a></li>
+      <li><a class="nav-cta" data-link="register">Register</a></li>
+    </ul>
+    <button class="icon-btn theme-toggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+    </button>
+    <button class="icon-btn nav-toggle" type="button" aria-label="Open menu" aria-expanded="false">
+      <span class="bars"><span></span><span></span><span></span></span>
+    </button>
+  </div>
+</nav>
+
+<header class="page-hero">
+  <div class="container">
+    <svg class="sign-icon" aria-hidden="true"><use href="#sign-priority"/></svg>
+    <div>
+      <span class="eyebrow">TariqQA 2027 · AbjadNLP Workshop</span>
+      <h1>Paper Submission Guidelines</h1>
+      <p class="lead">How to write and submit your system description paper. Papers are short, non-anonymous, reviewed by fellow participants, and published in the AbjadNLP 2027 proceedings.</p>
+    </div>
+  </div>
+</header>
+
+<main id="content">
+<section class="section">
+  <div class="container narrow">
+
+    <nav class="toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#essentials">Essentials</a>
+      <a href="#title">Title</a>
+      <a href="#structure">Structure</a>
+      <a href="#formatting">Formatting</a>
+      <a href="#principles">Guiding principles</a>
+      <a href="#review">Review and camera-ready</a>
+      <a href="#citation">Citing the task</a>
+      <a href="#checklist">Checklist</a>
+    </nav>
+
+    <h2 id="essentials"><svg class="h-icon" aria-hidden="true"><use href="#sign-info"/></svg> 1. Essentials</h2>
+    <table class="tbl">
+      <tbody>
+        <tr><td><strong>Who</strong></td><td>Every team with at least one official run in the evaluation phase.</td></tr>
+        <tr><td><strong>What</strong></td><td>A system description paper: how your system works, how it was built, how it performed, what you learned.</td></tr>
+        <tr><td><strong>Length</strong></td><td>Up to <strong>4 pages</strong> of main content. References and appendices are unlimited.</td></tr>
+        <tr><td><strong>Where</strong></td><td><a data-link="openreview">OpenReview</a>, through the submission link sent to registered teams.</td></tr>
+        <tr><td><strong>When</strong></td><td>See the <a href="index.html#timeline">timeline</a>. Papers submitted after the deadline cannot be included in the proceedings.</td></tr>
+        <tr><td><strong>Anonymity</strong></td><td>Papers are <strong>not</strong> anonymous. You may post them on arXiv at any time.</td></tr>
+      </tbody>
+    </table>
+
+    <h2 id="title"><svg class="h-icon" aria-hidden="true"><use href="#sign-mandatory"/></svg> 2. Title</h2>
+    <p>Use the pattern <code>&lt;Team Name&gt; at TariqQA 2027: &lt;Your Contribution&gt;</code>, for example:</p>
+    <ul>
+      <li><em>Koutoubia at TariqQA 2027: Retrieval over Law 52-05 for Darija Traffic Questions</em></li>
+      <li><em>ZelligeNLP at TariqQA 2027: Does Fine-tuning Beat Prompting on Moroccan Traffic Law?</em></li>
+    </ul>
+    <p>The team name in the title must match the team name on Codabench.</p>
+
+    <h2 id="structure"><svg class="h-icon" aria-hidden="true"><use href="#sign-parking"/></svg> 3. Recommended structure</h2>
+    <ol class="paper-structure">
+      <li><strong>Abstract</strong> A short summary of the system, the tracks entered and the main result.</li>
+      <li><strong>Introduction</strong> Why the task matters, which tracks and language varieties you targeted, a citation of the task overview paper, your main strategy and key findings. A link to your code is strongly recommended here.</li>
+      <li><strong>Background</strong> The task setup with an input/output example, the dataset (varieties, sources, size), the tracks you entered, and the related work that shaped your approach.</li>
+      <li><strong>System overview</strong> Algorithms, models and design decisions; external resources (models, corpora, legal texts, tools) and how they were used; how you handled Darija, code-mixing and article-grounded questions; equations or pseudo-code for anything novel. If you submitted several runs or configurations, make the differences explicit.</li>
+      <li><strong>Experimental setup</strong> How you used the train, development and test splits; preprocessing; hyper-parameters; prompts (verbatim, in the appendix if long); software with versions and URLs; evaluation metrics.</li>
+      <li><strong>Results</strong> The official test score and rank, clearly separated from post-evaluation experiments; development-set results, ablations and comparisons; a breakdown by language variety and question type; an error analysis with examples. State which split every number comes from.</li>
+      <li><strong>Conclusion</strong> Summary, limitations, and what you would do next.</li>
+      <li><strong>Ethics and limitations</strong> A short paragraph on possible misuse, in particular the risk of wrong legal advice to drivers, and on the limits of your system.</li>
+      <li><strong>Acknowledgments</strong> Optional.</li>
+      <li><strong>Appendix</strong> Low-level details needed for replication: full prompts, retrieval settings, additional tables.</li>
+    </ol>
+
+    <h2 id="formatting"><svg class="h-icon" aria-hidden="true"><use href="#sign-noentry"/></svg> 4. Formatting</h2>
+    <ul>
+      <li>Use the official <a data-link="aclStyle">ACL style files</a> (LaTeX or Word) for the EACL/ACL 2027 cycle, exactly as distributed. Do not modify margins, fonts or spacing, and do not use templates from other venues.</li>
+      <li>Main content: up to 4 pages. References: unlimited. Appendices: unlimited, but reviewers are not required to read them, so everything needed to understand and judge the system belongs in the main text.</li>
+      <li>Submissions that exceed the page limit or do not conform to the style are returned without review.</li>
+      <li>Write in English. Examples from the data may be given in Arabic script with a translation or gloss.</li>
+      <li>Cite the TariqQA overview paper (see below) and any dataset, model or tool you used.</li>
+    </ul>
+
+    <h2 id="principles"><svg class="h-icon" aria-hidden="true"><use href="#sign-priority"/></svg> 5. Guiding principles</h2>
+    <ul>
+      <li><strong>Replicability.</strong> A reader should be able to rebuild your system from the paper and the appendix. Release code and models when you can, and give the URL in the paper.</li>
+      <li><strong>Analysis over ranking.</strong> A well-analysed system that did not top the leaderboard is more useful to the community than a bare score. Report multiple runs, ablations, and failures.</li>
+      <li><strong>Do not repeat the task paper.</strong> Describe the task in a few sentences and cite the overview paper for the rest.</li>
+      <li><strong>Be honest about the official run.</strong> Post-evaluation improvements are welcome, but must be labelled as such and kept apart from the official result.</li>
+    </ul>
+
+    <h2 id="review"><svg class="h-icon" aria-hidden="true"><use href="#sign-warning"/></svg> 6. Review and camera-ready</h2>
+    <ul>
+      <li>Every author needs an OpenReview account. The submission link is sent to registered teams before the deadline.</li>
+      <li>Each team reviews two other system papers. Reviews are short, constructive and checked by an organizer. Not reviewing may lead to the team's own paper being withdrawn.</li>
+      <li>Acceptance is based on clarity, completeness and replicability, not on leaderboard position.</li>
+      <li>Camera-ready versions may only change what the reviewers and organizers asked for. No new experiments or claims after the review period.</li>
+      <li>At least one author of each accepted paper registers for the workshop and presents the paper. Papers without a registered presenter by the early-registration deadline may be removed from the proceedings.</li>
+    </ul>
+
+    <h2 id="citation"><svg class="h-icon" aria-hidden="true"><use href="#sign-signals"/></svg> 7. Citing the task</h2>
+    <p>The overview paper will be available before the paper deadline. Until then, cite the task as follows and update the entry in the camera-ready version:</p>
+<pre><code>@inproceedings{tariqqa2027,
+  title     = {TariqQA 2027: Shared Task on Moroccan Traffic Law Question Answering
+               in Modern Standard Arabic, Darija and English},
+  author    = {ORGANIZERS, TBA},
+  booktitle = {Proceedings of the AbjadNLP 2027 Workshop},
+  year      = {2027}
+}</code></pre>
+
+    <h2 id="checklist"><svg class="h-icon" aria-hidden="true"><use href="#sign-nouturn"/></svg> 8. Checklist before you submit</h2>
+    <ul class="checklist">
+      <li>Title follows <code>&lt;Team&gt; at TariqQA 2027: &lt;Contribution&gt;</code> and matches the Codabench team name.</li>
+      <li>Official ACL style, 4 pages of main content, no modified template.</li>
+      <li>The official test result and track(s) are reported and separated from post-evaluation results.</li>
+      <li>Every external resource (models, APIs, legal texts, extra data) is named with a version.</li>
+      <li>Per-variety results and an error analysis are included.</li>
+      <li>The overview paper is cited; a code URL is given if available.</li>
+      <li>Ethics and limitations paragraph is present.</li>
+      <li>All authors have OpenReview accounts and one author will register and present.</li>
+    </ul>
+
+    <div class="cta-row mt-3">
+      <a class="btn btn-primary" data-link="openreview"><svg aria-hidden="true"><use href="#sign-mandatory"/></svg> Submit on OpenReview</a>
+      <a class="btn btn-outline" href="guidelines.html">Participation guidelines</a>
+      <a class="btn btn-outline" href="index.html">Back to the task page</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="tiny">
+      <span>© <span data-year>2026</span> TariqQA organizers. Page maintained by <span class="tba">maintainer</span>, hosted on GitHub Pages.</span>
+      <span><a href="index.html">TariqQA home</a> · <a data-link="workshop">AbjadNLP Workshop</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/config.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>

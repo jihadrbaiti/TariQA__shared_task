@@ -5,4 +5,3 @@ Moroccan Highway Code (Law 52-05) in Modern Standard Arabic, Moroccan Darija and
 proposed for the AbjadNLP 2027 Workshop. Inspired in structure by the AbjadGenEval task page.
 
 Plain HTML, CSS and JavaScript. No build step, no dependencies. Ready for GitHub Pages.
-

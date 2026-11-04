@@ -197,7 +197,7 @@ pre code { background: transparent; padding: 0; color: inherit; font-size: inher
 .brand:hover { color: var(--text); }
 .brand svg { width: 26px; height: 60px; }
 .brand .brand-ar { font-family: var(--font-arabic); color: var(--terracotta); font-size: 1.4rem; margin-top: -4px; }
-.nav-links { display: flex; gap: 2px; list-style: none; margin: 0; padding: 0; }
+.nav-links { display: flex; gap: 12px; list-style: none; margin: 0; padding: 0; }
 .nav-links li { margin: 0; }
 .nav-links a {
   display: block; padding: 8px 11px; border-radius: 999px; color: var(--text-2);
@@ -222,7 +222,7 @@ pre code { background: transparent; padding: 0; color: inherit; font-size: inher
   .nav-links {
     display: none; position: absolute; top: calc(100% + 1px); left: 0; right: 0;
     flex-direction: column; background: var(--surface); border-bottom: 1px solid var(--line);
-    padding: 10px 12px 14px; box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12); gap: 2px;
+    padding: 10px 12px 14px; box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12); gap: 8px;
   }
   .nav.open .nav-links { display: flex; }
   .nav-links a { padding: 10px 14px; border-radius: 10px; }

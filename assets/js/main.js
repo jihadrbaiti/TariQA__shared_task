@@ -291,7 +291,7 @@
 
   /* ---------------------------------------------------------------------
      6. Organizers, generated from assets/organizers.csv
-        Only first_name and last_name are displayed.
+        Displays first_name, last_name, and affiliation.
         Note: browsers block fetch() on file:// pages, so preview the site
         through a web server (python -m http.server) or on GitHub Pages.
      --------------------------------------------------------------------- */
@@ -338,6 +338,8 @@
     var card = document.createElement('div');
     card.className = 'person reveal';
     card.appendChild(textDiv('name', fullName));
+    if (p.role) { card.appendChild(textDiv('role', p.role)); }
+    if (p.affiliation) { card.appendChild(textDiv('aff', p.affiliation)); }
     return card;
   }
 

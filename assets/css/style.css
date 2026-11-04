@@ -141,7 +141,7 @@ pre code { background: transparent; padding: 0; color: inherit; font-size: inher
 .prose li { margin-bottom: 0.45em; }
 .muted { color: var(--muted); }
 .small { font-size: 0.9rem; }
-.mt-1 { margin-top: 12px; } .mt-2 { margin-top: 26px; } .mt-3 { margin-top: 44px; }
+.mt-1 { margin-top: 12px; } .mt-2 { margin-top: 40px; } .mt-3 { margin-top: 64px; }
 .mb-0 { margin-bottom: 0; }
 
 .skip-link {

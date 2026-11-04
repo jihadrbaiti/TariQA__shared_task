@@ -291,7 +291,7 @@
 
   /* ---------------------------------------------------------------------
      6. Organizers, generated from assets/organizers.csv
-        Displays first_name, last_name, and affiliation.
+        Displays first_name, last_name, role, and affiliation.
         Note: browsers block fetch() on file:// pages, so preview the site
         through a web server (python -m http.server) or on GitHub Pages.
      --------------------------------------------------------------------- */

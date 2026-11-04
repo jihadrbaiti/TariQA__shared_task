@@ -431,7 +431,7 @@ a.is-tba:not(.btn) .tba-badge { margin-left: 5px; }
 
 .bar { display: flex; height: 36px; border-radius: 8px; overflow: hidden; font-size: 0.82rem; font-weight: 700; color: #fff; margin: 8px 0 12px; }
 .bar span { display: flex; align-items: center; justify-content: center; white-space: nowrap; overflow: hidden; padding: 0 4px; }
-.b-msa { background: var(--cobalt); } .b-darija { background: var(--terracotta); } .b-en { background: var(--emerald); }
+.b-msa { background: var(--cobalt); } .b-darija { background: var(--terracotta); }
 .b-a { background: var(--flag-red); } .b-b { background: var(--cobalt); } .b-c { background: var(--emerald); }
 
 /* ==========================================================================

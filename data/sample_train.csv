@@ -1,21 +1,16 @@
 id,question,A,B,C,answer
-TQA-00001,Under what condition regarding vehicle weight must an officer order the stopping of a vehicle?,If the weight exceeds the limit by exactly 5%,If the total authorized weight is exceeded by any amount,If the total authorized weight is exceeded by more than 10%,C
 TQA-00002,متى يمكن إصلاح المركبة المودعة في المحجز بسبب سوء حالتها الميكانيكية؟,بعد انقضاء مدة الإيداع,أثناء فترة الحراسة والإيداع,فور دخولها إلى المحجز,A
-TQA-00003,"In the case of a violation report generated electronically on-site, what is true regarding signatures?",Both the officer and the violator must sign electronically,The violator's signature is not required,The officer's electronic signature is not necessary if the violator signs,B
 TQA-00004,ما هي مدة صلاحية الحامل المحررة فيه رخصة السياقة وفقاً للمادة 38؟,خمس عشرة سنة,خمس سنوات,عشر سنوات,C
 TQA-00005,كيف يتم السير في القارعة الخاصة بملتقى الطرق الدوراني حسب المادة 85؟,في اتجاه عقارب الساعة,في الاتجاه المعاكس لعقارب الساعة,في اتجاهين مختلفين حسب نوع المركبة,B
 TQA-00006,ما هي قيمة الغرامة في حالة العود لمدير مؤسسة لا يحترم أحكام المادة 241 أو 242 أعلاه؟,من 40.000 إلى 80.000 درهم,من 10.000 إلى 20.000 درهم,من 20.000 إلى 40.000 درهم,C
 TQA-00007,ما هي مدة صلاحية الحامل المحررة فيه رخصة السياقة وفقاً للمادة 38؟,خمس سنوات,خمس عشرة سنة,عشر سنوات,C
 TQA-00008,شنو أكثر علامة كتطيح فالامتحان؟,علامة تحديد السرعة.,علامة انتباه خطر.,علامة قف.,C
-TQA-00009,What is the minimum constant speed a motor vehicle must be capable of maintaining to enter a highway?,40 km/h,60 km/h,80 km/h,B
 TQA-00010,شنو معنى إشارة “ممنوع الدخول”؟,يمنع دخول كافة أنواع المركبات للشارع من جميع الجهات المتاحة.,لا يمكن الدخول للشارع إلا من جهة أخرى مسموح بها.,يمنع الوقوف أو التوقف في الشارع لتسهيل حركة المرور المستمرة.,B
 TQA-00011,ما وظيفة المقود؟,توجيه السيارة والتحكم في مسارها أثناء القيادة.,التحكم في سرعة المحرك وتنظيم استهلاك الوقود أثناء القيادة.,تأمين توازن الإطارات ومنع السيارة من الانزلاق في المنعطفات.,A
 TQA-00012,تحت أي فئة تندرج 'التدابير الاستثنائية خلال فترات تساقط الثلوج أو الزوابع الرملية' حسب المادة 87؟,قواعد الاستعمال العام للطرق المطبقة على كافة المستعملين,القواعد المتعلقة بسلوك السائقين تجاه المواكب الجنائزية,قواعد الاستعمال الخاص للطرق المفتوحة للسير العمومي,C
 TQA-00013,واش السرعة القانونية بالمغرب مهمة للسلامة؟,لا، حالة الطريق هي السبب الرئيسي فالحوادث ماشي السرعة.,لا، مهارة السائق كافية باش يتجنب الحوادث وخا يسرع.,نعم احترام السرعة القانونية بالمغرب كيقلل الحوادث.,C
 TQA-00014,أي من المعطيات التالية يتم تسجيلها في الجذاذية الوطنية لرخصة السياقة حسب المادة 128؟,السجل العدلي الكامل لصاحب رخصة السياقة,قائمة بجميع الأملاك العقارية المسجلة باسم صاحب الرخصة,المعلومات المتعلقة بخصم النقط المخصصة للرخصة أو استرجاعها,C
-TQA-00015,"According to Article 19, who is explicitly prohibited from being a member of the medical appeal committee?",The doctor who conducted the initial medical examination being appealed.,The president of the First Instance Court of the driver's residence.,Any doctor who is not a member of the National Council of the Order of Physicians.,A
 TQA-00016,شنو كيوقع إلا تجاوزت السرعة القانونية بالمغرب؟,كتخلص غرامة مالية فقط ومكيتسحبوش ليك النقاط من رخصة السياقة.,كتتعرض لغرامة مالية وقد يتم سحب نقاط من رخصة السياقة.,كيتم سحب رخصة السياقة فالبلاصة مع حجز السيارة فالمستودع البلدي.,B
 TQA-00017,ما هي الغرامة المحددة في المادة 152-1 لمن لم يسلم رخصة سياقته التي نفد رصيد نقطها في الأجل المحدد؟,من 1.000 إلى 4.000 درهم,من 5.000 إلى 10.000 درهم,من 2.000 إلى 8.000 درهم,A
-TQA-00018,Which types of vehicles are covered under the Category AM driving license?,Mopeds and light motor quadricycles,Heavy motorcycles and motorized trikes,Agricultural vehicles and light trucks,A
 TQA-00019,شنو السرعة القصوى في الطرق السريعة؟,120 كم/س,100 كم/س,140 كم/س,A
 TQA-00020,كم مرة يجب على الجمعيات تقديم تقرير للإدارة عن نشاطها في مجال التربية على السلامة الطرقية؟,كل ستة أشهر,سنوياً,مرة واحدة كل سنتين,B

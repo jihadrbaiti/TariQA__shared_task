@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>TariQA 2027 · Moroccan Traffic Law QA Shared Task</title>
-<meta name="description" content="TariQA: a shared task on multiple-choice question answering over Moroccan traffic law (Law 52-05, the Highway Code) in Modern Standard Arabic, Moroccan Darija and English, hosted at the AbjadNLP 2027 Workshop.">
+<meta name="description" content="TariQA: a shared task on multiple-choice question answering over Moroccan traffic law (Law 52-05, the Highway Code) in Modern Standard Arabic and Moroccan Darija, hosted at the AbjadNLP 2027 Workshop.">
 <meta property="og:title" content="TariQA 2027 · Moroccan Traffic Law QA Shared Task">
 <meta property="og:description" content="Can your system pass the Moroccan driving-theory test, and the law exam behind it? Register for the TariQA shared task at AbjadNLP 2027.">
 <meta property="og:type" content="website">
@@ -209,7 +209,7 @@
       </h1>
       <p class="lead">
         A shared task on multiple-choice question answering over the Moroccan Highway Code
-        (Law 52-05), with questions in Modern Standard Arabic, Moroccan Darija and English.
+        (Law 52-05), with questions in Modern Standard Arabic and Moroccan Darija.
         Can your system pass the Moroccan driving-theory test, and the law exam behind it?
       </p>
       <div class="hero-ctas">
@@ -219,8 +219,7 @@
         <a class="btn btn-outline on-dark" data-link="slack"><svg aria-hidden="true"><use href="#sign-info"/></svg> Slack</a>
       </div>
       <ul class="hero-meta">
-        <li><strong>5,147</strong> three-option questions</li>
-        <li><strong>3</strong> language varieties: MSA, Darija, English</li>
+        <li>Two language varieties: MSA and Darija</li>
         <li><strong>2</strong> tracks: closed-book and open</li>
         <li>Workshop venue and dates: <span class="tba">TBA</span></li>
       </ul>
@@ -416,11 +415,10 @@
           <em>Code de la Route</em>), a system must choose the single correct answer among three candidates.
         </p>
         <p>
-          Questions are written the way Moroccans actually ask them: in Modern Standard Arabic, in
-          Moroccan Darija (often with French loanwords such as <em>embrayage</em> or <em>compteur</em>), and in
-          English. The task therefore combines three challenges that are rarely evaluated together:
-          dialectal understanding, precise country-specific legal knowledge, and robustness to distractors
-          that are deliberately close to the correct answer.
+          Questions are written the way Moroccans actually ask them: in Modern Standard Arabic and
+          Moroccan Darija (often with French loanwords such as <em>embrayage</em> or <em>compteur</em>).
+          The task combines dialectal understanding, precise country-specific legal knowledge, and
+          robustness to distractors that are deliberately close to the correct answer.
         </p>
         <p>
           The task is open to everyone: academic groups, industry teams and individual researchers.
@@ -433,7 +431,7 @@
         <ul class="checklist">
           <li><strong>Task</strong>: three-option multiple-choice question answering (output A, B or C).</li>
           <li><strong>Domain</strong>: Moroccan Highway Code and driving-school theory.</li>
-          <li><strong>Languages</strong>: Modern Standard Arabic, Moroccan Darija, English, in one shared test set.</li>
+          <li><strong>Languages</strong>: Modern Standard Arabic and Moroccan Darija, in one shared test set.</li>
           <li><strong>Tracks</strong>: Closed-book (parametric knowledge only) and Open (retrieval, tools, anything documented).</li>
           <li><strong>Metrics</strong>: accuracy (primary), macro-F1 (secondary), per-variety breakdown.</li>
           <li><strong>Submission</strong>: predictions on Codabench, papers on OpenReview.</li>
@@ -500,36 +498,37 @@
 
     <div class="prose mt-2 reveal">
       <p>
-        The TariQA dataset contains <strong>5,147 multiple-choice questions</strong> about Moroccan traffic law.
+        The TariQA dataset contains multiple-choice questions about Moroccan traffic law.
         Each question comes with three candidate answers (A, B, C) and exactly one gold label. Questions are
         drawn from two complementary sources:
       </p>
       <ul>
         <li><strong>Driving knowledge.</strong> Questions of the kind used in driving-school theory tests: road signs, right of way, overtaking, lights, speed, safe behaviour, vehicle documents and insurance.</li>
-        <li><strong>The legal code.</strong> Questions grounded in specific articles of Law 52-05 and its implementing texts: classes of violations, fines, point deductions, prison terms, deadlines and administrative procedures. About one question in five cites the article it is based on.</li>
+        <li><strong>The legal code.</strong> Questions grounded in specific articles of Law 52-05 and its implementing texts: classes of violations, fines, point deductions, prison terms, deadlines and administrative procedures. Article citations will be reported with the data release.</li>
       </ul>
       <p>
         Distractors are plausible and lexically close to the correct option (same structure, different number,
-        duration or authority), so surface-level matching is not enough. Labels are near-balanced across A, B and C.
+        duration or authority), so surface-level matching is not enough. Label distribution will be reported
+        with the MSA and Darija data release.
       </p>
     </div>
 
     <!-- stats as road signs -->
     <div class="stats reveal" aria-label="Dataset statistics">
       <div class="stat">
-        <div class="figure sign-oct"><span>5,147</span></div>
-        <div class="label">multiple-choice questions</div>
+        <div class="figure sign-oct"><span>TBA</span></div>
+        <div class="label">MSA and Darija multiple-choice questions</div>
       </div>
       <div class="stat">
         <div class="figure sign-circle"><span>3</span></div>
         <div class="label">answer options per question</div>
       </div>
       <div class="stat">
-        <div class="figure sign-square"><span class="stack"><span>MSA</span><span>Darija</span><span>English</span></span></div>
+        <div class="figure sign-square"><span class="stack"><span>MSA</span><span>Darija</span></span></div>
         <div class="label">language varieties in one test set</div>
       </div>
       <div class="stat">
-        <div class="figure sign-diamond"><span>21%</span></div>
+        <div class="figure sign-diamond"><span>TBA</span></div>
         <div class="label">questions citing an article of Law 52-05</div>
       </div>
       <div class="stat">
@@ -541,17 +540,14 @@
     <div class="grid grid-2 mt-2">
       <div class="card reveal">
         <h3>Language varieties <span class="muted small">(approximate)</span></h3>
-        <div class="bar" role="img" aria-label="Approximately 74 percent Modern Standard Arabic, 18 percent Darija, 8 percent English">
-          <span style="width:74%" class="b-msa">MSA 74%</span><span style="width:18%" class="b-darija">Darija 18%</span><span style="width:8%" class="b-en">EN</span>
+        <div class="bar" role="img" aria-label="Approximate distribution: 80 percent Modern Standard Arabic and 20 percent Darija">
+          <span style="width:80%" class="b-msa">MSA 80%</span><span style="width:20%" class="b-darija">Darija 20%</span>
         </div>
         <p class="small muted mb-0">Variety labels are derived from lexical markers and will be released with the data so that results can be reported per variety.</p>
       </div>
       <div class="card reveal">
         <h3>Gold answer distribution</h3>
-        <div class="bar" role="img" aria-label="A 33.9 percent, B 34.3 percent, C 31.8 percent">
-          <span style="width:33.9%" class="b-a">A 33.9%</span><span style="width:34.3%" class="b-b">B 34.3%</span><span style="width:31.8%" class="b-c">C 31.8%</span>
-        </div>
-        <p class="small muted mb-0">Random guessing scores 33.3% accuracy and always answering B scores 34.3%, so there is little to gain from label priors.</p>
+        <p class="small muted mb-0">The distribution will be reported with the MSA and Darija data release.</p>
       </div>
     </div>
 
@@ -584,15 +580,6 @@
           <li class="opt correct"><span class="k">C</span><span>عشرين (20) إلى أقل من ثلاثين (30) كلم في الساعة</span></li>
         </ul>
       </article>
-      <article class="mcq reveal" dir="ltr" lang="en">
-        <span class="tag">English</span>
-        <p class="q">What is the point deduction for a driver who fails to respect a stop sign or a red light signal?</p>
-        <ul class="opts">
-          <li class="opt"><span class="k">A</span><span>6 points</span></li>
-          <li class="opt correct"><span class="k">B</span><span>4 points</span></li>
-          <li class="opt"><span class="k">C</span><span>2 points</span></li>
-        </ul>
-      </article>
     </div>
 
     <div class="grid grid-2 mt-3">
@@ -610,13 +597,13 @@ TQA-00002,<bdi>واش يمكن التجاوز من اليمين؟</bdi>,<bdi>ل�
             <tr><td>Test</td><td><span class="tba">TBA</span> (about 20%)</td><td>withheld</td><td>evaluation phase</td></tr>
           </tbody>
         </table>
-        <p class="small muted mt-1">Near-duplicate questions are grouped before splitting so that no test question has a paraphrase in the training data. Licence: <span class="tba">TBA</span>. A 20-question <a data-link="sample">sample file</a> shows the exact format.</p>
+        <p class="small muted mt-1">Near-duplicate questions are grouped before splitting so that no test question has a paraphrase in the training data. Licence: <span class="tba">TBA</span>. A 15-question <a data-link="sample">sample file</a> shows the exact format.</p>
       </div>
 
       <!-- Interactive sample test -->
       <div class="quiz-wrap reveal">
         <h3>Take the test <span class="ar muted" lang="ar">جرّب بنفسك</span></h3>
-        <p class="small muted">Twelve real questions from the dataset. Pick an answer and watch the light.</p>
+        <p class="small muted">Nine sample questions from the dataset. Pick an answer and watch the light.</p>
         <div class="quiz card" id="quiz">
           <div class="quiz-main">
             <div class="quiz-top">
@@ -671,7 +658,7 @@ TQA-00002,<bdi>واش يمكن التجاوز من اليمين؟</bdi>,<bdi>ل�
           <div class="io-in">
             <span class="io-label">Input</span>
             <code>question</code> <code>A</code> <code>B</code> <code>C</code>
-            <p class="small muted mb-0">A question and its three candidate answers, in MSA, Darija or English.</p>
+            <p class="small muted mb-0">A question and its three candidate answers, in MSA or Darija.</p>
           </div>
           <div class="io-arrow" aria-hidden="true"><svg><use href="#sign-turnright"/></svg></div>
           <div class="io-out">
@@ -721,7 +708,7 @@ TQA-00002,<bdi>واش يمكن التجاوز من اليمين؟</bdi>,<bdi>ل�
           <tbody>
             <tr><td><strong>Accuracy</strong></td><td>Primary, used for ranking</td><td>Share of test questions whose predicted letter equals the gold letter.</td></tr>
             <tr><td><strong>Macro-F1</strong></td><td>Secondary, tie-breaker</td><td>Computed over the three labels A, B, C.</td></tr>
-            <tr><td><strong>Per-variety accuracy</strong></td><td>Reported</td><td>MSA, Darija and English subsets, and driving-knowledge versus article-grounded questions.</td></tr>
+            <tr><td><strong>Per-variety accuracy</strong></td><td>Reported</td><td>MSA and Darija subsets, and driving-knowledge versus article-grounded questions.</td></tr>
           </tbody>
         </table>
         <p class="small muted mt-1">The official scorer will be released in the GitHub repository together with the training data, so that development scores are directly comparable with the leaderboard.</p>

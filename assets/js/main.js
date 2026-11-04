@@ -291,8 +291,7 @@
 
   /* ---------------------------------------------------------------------
      6. Organizers, generated from assets/organizers.csv
-        Columns: first_name, last_name, affiliation, role, orcid, linkedin,
-        google_scholar, research_gate, email, profile_picture_path
+        Only first_name and last_name are displayed.
         Note: browsers block fetch() on file:// pages, so preview the site
         through a web server (python -m http.server) or on GitHub Pages.
      --------------------------------------------------------------------- */
@@ -327,41 +326,6 @@
       });
   }
 
-  function webUrl(v) { return /^https?:\/\//i.test(v || '') ? v : ''; }
-  function orcidUrl(v) {
-    if (/^\d{4}-\d{4}-\d{4}-\d{3}[\dX]$/i.test(v || '')) { return 'https://orcid.org/' + v; }
-    return webUrl(v);
-  }
-  function emailUrl(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v || '') ? 'mailto:' + v : ''; }
-
-  // Accepts "assets/img/x.jpg", a full URL, or an absolute local path such as
-  // C:\...\assets\img\x.jpg (mapped back to the site-relative assets/img/x.jpg).
-  function picturePath(v) {
-    if (!v) { return ''; }
-    v = v.replace(/\\/g, '/');
-    if (/^https?:\/\//i.test(v)) { return v; }
-    var k = v.toLowerCase().lastIndexOf('/assets/');
-    if (k !== -1) { return v.slice(k + 1); }
-    if (/^[a-z]:\//i.test(v) || v.charAt(0) === '/') { return 'assets/img/' + v.split('/').pop(); }
-    if (/^[a-z][a-z0-9+.\-]*:/i.test(v)) { return ''; }
-    return v;
-  }
-
-  var ICONS = {
-    scholar: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#4285F4"/><path d="M12 5 L3 10 L12 15 L19 11.1 V15.5 H20.5 V10.3 Z" fill="#fff"/><path d="M7 13 V16 C7 17.7 9.2 19 12 19 C14.8 19 17 17.7 17 16 V13 L12 15.8 Z" fill="#fff"/></svg>',
-    linkedin: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="4" fill="#0A66C2"/><rect x="5" y="9.5" width="3" height="9" fill="#fff"/><circle cx="6.5" cy="6.4" r="1.8" fill="#fff"/><path d="M10.5 9.5 H13.4 V10.9 C13.9 10 15 9.3 16.4 9.3 C18.6 9.3 19.5 10.7 19.5 13.2 V18.5 H16.6 V13.8 C16.6 12.6 16.2 11.9 15.2 11.9 C14.1 11.9 13.4 12.7 13.4 13.9 V18.5 H10.5 Z" fill="#fff"/></svg>',
-    orcid: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#A6CE39"/><rect x="6.6" y="9.6" width="1.8" height="8" fill="#fff"/><circle cx="7.5" cy="7" r="1.15" fill="#fff"/><path d="M10.5 9.6 H13.4 C16 9.6 17.6 11.3 17.6 13.6 C17.6 15.9 16 17.6 13.4 17.6 H10.5 Z M12.3 11.2 V16 H13.3 C15 16 15.8 15 15.8 13.6 C15.8 12.2 15 11.2 13.3 11.2 Z" fill="#fff" fill-rule="evenodd"/></svg>',
-    researchgate: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="4" fill="#00CCBB"/><text x="12" y="16.6" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" fill="#fff">R<tspan font-size="8" dy="-3">G</tspan></text></svg>',
-    email: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#BD5A2C"/><rect x="5.5" y="7.5" width="13" height="9" rx="1.5" fill="#fff"/><path d="M6 8.3 L12 12.8 L18 8.3" fill="none" stroke="#BD5A2C" stroke-width="1.4"/></svg>'
-  };
-  var PROFILE_LINKS = [
-    { col: 'google_scholar', icon: 'scholar', label: 'Google Scholar', url: webUrl },
-    { col: 'linkedin', icon: 'linkedin', label: 'LinkedIn', url: webUrl },
-    { col: 'orcid', icon: 'orcid', label: 'ORCID', url: orcidUrl },
-    { col: 'research_gate', icon: 'researchgate', label: 'ResearchGate', url: webUrl },
-    { col: 'email', icon: 'email', label: 'E-mail', url: emailUrl }
-  ];
-
   function textDiv(cls, text) {
     var d = document.createElement('div');
     d.className = cls;
@@ -373,44 +337,7 @@
     var fullName = [p.first_name, p.last_name].filter(Boolean).join(' ');
     var card = document.createElement('div');
     card.className = 'person reveal';
-
-    // Without a photo the arch window stays empty: just the coloured gradient.
-    var avatar = document.createElement('div');
-    avatar.className = 'avatar';
-    var pic = picturePath(p.profile_picture_path);
-    if (pic) {
-      var img = document.createElement('img');
-      img.src = pic;
-      img.alt = 'Photo of ' + fullName;
-      img.loading = 'lazy';
-      img.onerror = function () { avatar.innerHTML = ''; avatar.setAttribute('aria-hidden', 'true'); };
-      avatar.appendChild(img);
-    } else {
-      avatar.setAttribute('aria-hidden', 'true');
-    }
-    card.appendChild(avatar);
     card.appendChild(textDiv('name', fullName));
-    if (p.role) { card.appendChild(textDiv('role', p.role)); }
-    if (p.affiliation) { card.appendChild(textDiv('aff', p.affiliation)); }
-
-    var linksBox = document.createElement('div');
-    linksBox.className = 'person-links';
-    PROFILE_LINKS.forEach(function (l) {
-      var url = l.url(p[l.col]);
-      if (!url) { return; }
-      var a = document.createElement('a');
-      a.className = 'plink';
-      a.href = url;
-      if (/^https?:/i.test(url)) {
-        a.target = '_blank';
-        a.rel = 'noopener noreferrer';
-      }
-      a.title = l.label;
-      a.setAttribute('aria-label', l.label + ' profile of ' + fullName);
-      a.innerHTML = ICONS[l.icon];
-      linksBox.appendChild(a);
-    });
-    if (linksBox.childNodes.length) { card.appendChild(linksBox); }
     return card;
   }
 

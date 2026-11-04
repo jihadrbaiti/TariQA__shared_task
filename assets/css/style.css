@@ -1,5 +1,5 @@
 /* ==========================================================================
-   TariqQA — Moroccan Traffic Law Question Answering Shared Task (AbjadNLP)
+   TariQA — Moroccan Traffic Law Question Answering Shared Task (AbjadNLP)
    Visual language: traditional Moroccan craft (zellige stars, horseshoe
    arches, saffron / cobalt / terracotta / emerald) fused with road signs,
    traffic lights and asphalt road motifs.
@@ -362,6 +362,7 @@ a.is-tba:not(.btn) .tba-badge { margin-left: 5px; }
   background-size: 80px 80px; opacity: 0.22; pointer-events: none;
 }
 .section > .container { position: relative; }
+#overview .overview-glance { align-self: start; }
 .section-head { display: flex; align-items: center; gap: 20px; }
 .section-head .sign-icon { width: 68px; height: 68px; flex: none; filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.18)); }
 .section-head h2 { margin: 0; }

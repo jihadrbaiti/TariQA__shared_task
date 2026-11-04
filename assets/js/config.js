@@ -1,5 +1,5 @@
 /* ==========================================================================
-   TariqQA site configuration
+   TariQA site configuration
    --------------------------------------------------------------------------
    Central place for every external link and contact detail shown on the
    site (index.html, guidelines.html, paper.html).  Leave a value empty ("")
@@ -7,7 +7,7 @@
    broken link.  Values starting with http open in a new tab.
    ========================================================================== */
 window.SITE_CONFIG = {
-  taskName: "TariqQA",
+  taskName: "TariQA",
 
   links: {
     register:   "",   // Registration form (e.g. a Google Form)

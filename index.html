@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>TariQA 2027 · Moroccan Traffic Law QA Shared Task</title>
-<meta name="description" content="TariQA: a shared task on multiple-choice question answering over Moroccan traffic law (Law 52-05, the Highway Code) in Modern Standard Arabic and Moroccan Darija, hosted at the AbjadNLP 2027 Workshop.">
+<meta name="description" content="TariQA: a shared task on multiple-choice question answering over Moroccan traffic law and the Highway Code in Modern Standard Arabic and Moroccan Darija, hosted at the AbjadNLP 2027 Workshop.">
 <meta property="og:title" content="TariQA 2027 · Moroccan Traffic Law QA Shared Task">
 <meta property="og:description" content="Can your system pass the Moroccan driving-theory test, and the law exam behind it? Register for the TariQA shared task at AbjadNLP 2027.">
 <meta property="og:type" content="website">
@@ -208,8 +208,8 @@
         <span class="h1-sub">Moroccan Traffic Law Question Answering</span>
       </h1>
       <p class="lead">
-        A shared task on multiple-choice question answering over the Moroccan Highway Code
-        (Law 52-05), with questions in Modern Standard Arabic and Moroccan Darija.
+        A shared task on multiple-choice question answering over the Moroccan Highway Code,
+        with questions in Modern Standard Arabic and Moroccan Darija.
         Can your system pass the Moroccan driving-theory test, and the law exam behind it?
       </p>
       <div class="hero-ctas">
@@ -219,8 +219,7 @@
         <a class="btn btn-outline on-dark" data-link="slack"><svg aria-hidden="true"><use href="#sign-info"/></svg> Slack</a>
       </div>
       <ul class="hero-meta">
-        <li><strong>2</strong> tracks: closed-book and open</li>
-        <li>Workshop venue and dates: <span class="tba">TBA</span></li>
+        <li>Workshop: 9–14 May 2027 · Macau</li>
       </ul>
     </div>
 
@@ -410,8 +409,8 @@
           answering questions about Moroccan traffic law, organized as part of the
           <a data-link="workshop">AbjadNLP 2027 Workshop</a> on natural language processing for languages that use
           the Arabic script. Given a question about driving rules, road signs, right of way, penalties, licence
-          points, vehicle documents or the articles of <strong>Law 52-05</strong> (the Moroccan Highway Code,
-          <em>Code de la Route</em>), a system must choose the single correct answer among three candidates.
+          points, vehicle documents or the Moroccan Highway Code (<em>Code de la Route</em>), a system must choose
+          the single correct answer among three candidates.
         </p>
         <p>
           Questions are written the way Moroccans actually ask them: in Modern Standard Arabic and
@@ -421,20 +420,17 @@
         </p>
         <p>
           The task is open to everyone: academic groups, industry teams and individual researchers.
-          Participation is free, and every team is invited to submit a system description paper to the
-          AbjadNLP 2027 proceedings.
+          Every team is invited to submit a system description paper to the AbjadNLP 2027 proceedings.
         </p>
       </div>
-      <div class="card reveal">
+      <div class="card reveal overview-glance">
         <h3><svg class="card-icon" aria-hidden="true"><use href="#sign-priority"/></svg> At a glance</h3>
         <ul class="checklist">
           <li><strong>Task</strong>: three-option multiple-choice question answering (output A, B or C).</li>
           <li><strong>Domain</strong>: Moroccan Highway Code and driving-school theory.</li>
           <li><strong>Languages</strong>: Modern Standard Arabic and Moroccan Darija, in one shared test set.</li>
-          <li><strong>Tracks</strong>: Closed-book (parametric knowledge only) and Open (retrieval, tools, anything documented).</li>
-          <li><strong>Metrics</strong>: accuracy (primary), macro-F1 (secondary), per-variety breakdown.</li>
+          <li><strong>Metrics</strong>: accuracy (primary), F1 score (secondary), per-variety breakdown.</li>
           <li><strong>Submission</strong>: predictions on Codabench, papers on OpenReview.</li>
-          <li><strong>Cost</strong>: free to participate. One author of an accepted paper registers for the workshop.</li>
         </ul>
       </div>
     </div>
@@ -503,11 +499,11 @@
       </p>
       <ul>
         <li><strong>Driving knowledge.</strong> Questions of the kind used in driving-school theory tests: road signs, right of way, overtaking, lights, speed, safe behaviour, vehicle documents and insurance.</li>
-        <li><strong>The legal code.</strong> Questions grounded in specific articles of Law 52-05 and its implementing texts: classes of violations, fines, point deductions, prison terms, deadlines and administrative procedures. Article citations will be reported with the data release.</li>
+        <li><strong>The legal code.</strong> Questions grounded in specific articles of the Moroccan Highway Code and its implementing texts: classes of violations, fines, point deductions, prison terms, deadlines and administrative procedures. Article citations will be reported with the data release.</li>
       </ul>
       <p>
         Distractors are plausible and lexically close to the correct option (same structure, different number,
-        duration or authority), so surface-level matching is not enough.
+        duration or authority).
       </p>
     </div>
 
@@ -527,7 +523,7 @@
       </div>
       <div class="stat">
         <div class="figure sign-diamond"><span>TBA</span></div>
-        <div class="label">questions citing an article of Law 52-05</div>
+        <div class="label">questions citing an article of the Moroccan Highway Code</div>
       </div>
       <div class="stat">
         <div class="figure sign-tri"><span> -- %</span></div>
@@ -561,8 +557,6 @@
       <div class="reveal">
         <h3>Format and splits</h3>
         <p>Data is distributed as UTF-8 CSV files with one question per row. The <code>answer</code> column is withheld in the test set.</p>
-<pre><code>id,question,A,B,C,answer
-TQA-00002,<bdi>واش يمكن التجاوز من اليمين؟</bdi>,<bdi>لا</bdi>,<bdi>نعم</bdi>,"<bdi>نعم، إلا كانت الطريق واسعة</bdi>",A</code></pre>
         <table class="tbl mt-1">
           <thead><tr><th>Split</th><th>Size</th><th>Labels</th><th>Release</th></tr></thead>
           <tbody>
@@ -645,11 +639,11 @@ TQA-00002,<bdi>واش يمكن التجاوز من اليمين؟</bdi>,<bdi>ل�
       <div class="card reveal">
         <h3>Rules in brief</h3>
         <ul class="checklist">
-          <li>Any model, architecture or prompting strategy is allowed, in both tracks.</li>
+          <li>Any permitted architecture or prompting strategy is allowed.</li>
           <li>The test set must not be used for training, tuning or model selection, and must not be annotated by hand.</li>
-          <li>Teams enter one or both tracks and declare the track with each run.</li>
+          <li>All teams enter the same single track.</li>
           <li>Every resource used (models, corpora, tools, APIs) is reported in the system description paper.</li>
-          <li>Up to three official test runs per team and track. The last valid run is the official one.</li>
+          <li>Up to three official test runs per team. The last valid run is the official one.</li>
         </ul>
       </div>
     </div>
@@ -661,8 +655,7 @@ TQA-00002,<bdi>واش يمكن التجاوز من اليمين؟</bdi>,<bdi>ل�
           <thead><tr><th>Metric</th><th>Role</th><th>Notes</th></tr></thead>
           <tbody>
             <tr><td><strong>Accuracy</strong></td><td>Primary, used for ranking</td><td>Share of test questions whose predicted letter equals the gold letter.</td></tr>
-            <tr><td><strong>Macro-F1</strong></td><td>Secondary, tie-breaker</td><td>Computed over the three labels A, B, C.</td></tr>
-            <tr><td><strong>Per-variety accuracy</strong></td><td>Reported</td><td>MSA and Darija subsets, and driving-knowledge versus article-grounded questions.</td></tr>
+            <tr><td><strong>F1 score</strong></td><td>Secondary, tie-breaker</td><td>Computed over the three labels A, B, C.</td></tr>
           </tbody>
         </table>
         <p class="small muted mt-1">The official scorer will be released in the GitHub repository together with the training data, so that development scores are directly comparable with the leaderboard.</p>
@@ -710,44 +703,44 @@ TQA-00003,B</code></pre>
       </div>
     </div>
     <div class="frieze reveal"></div>
-    <p class="prose mt-2 reveal">All deadlines are 23:59 <strong>anywhere on Earth (UTC-12)</strong>. Dates are tentative until the AbjadNLP 2027 workshop dates are confirmed; changes will be announced on the mailing list and Slack.</p>
+    <p class="prose mt-2 reveal">All deadlines are 23:59 <strong>anywhere on Earth (UTC-12)</strong>. Other dates are tentative; changes will be announced on the mailing list and Slack.</p>
 
     <ol class="road reveal">
       <li class="milestone">
         <div class="marker"><span>1</span></div>
-        <div class="card"><div class="date">-- November 2026</div><h3>Registration opens</h3><p>Register your team to receive the data-release announcement and Slack invitation.</p></div>
+        <div class="card"><div class="date"><span class="tba">Date TBA</span></div><h3>Registration opens</h3><p>Register your team to receive the data-release announcement and Slack invitation.</p></div>
       </li>
       <li class="milestone">
         <div class="marker"><span>2</span></div>
-        <div class="card"><div class="date">-- December 2026</div><h3>Training and development data</h3><p>Labelled train and dev splits, baselines and the official scorer. The Codabench development phase opens.</p></div>
+        <div class="card"><div class="date"><span class="tba">Date TBA</span></div><h3>Training and development data</h3><p>Labelled train and dev splits, baselines and the official scorer. The Codabench development phase opens.</p></div>
       </li>
       <li class="milestone">
         <div class="marker"><span>3</span></div>
-        <div class="card"><div class="date">-- January 2027</div><h3>Test data release</h3><p>Unlabelled test set. The evaluation phase opens on Codabench.</p></div>
+        <div class="card"><div class="date"><span class="tba">Date TBA</span></div><h3>Test data release</h3><p>Unlabelled test set. The evaluation phase opens on Codabench.</p></div>
       </li>
       <li class="milestone">
         <div class="marker"><span>4</span></div>
-        <div class="card"><div class="date">-- February 2027</div><h3>Test submissions close</h3><p>Up to three runs per team and track. Only runs made inside the evaluation window count as official.</p></div>
+        <div class="card"><div class="date"><span class="tba">Date TBA</span></div><h3>Test submissions close</h3><p>Up to three runs per team. Only runs made inside the evaluation window count as official.</p></div>
       </li>
       <li class="milestone">
         <div class="marker"><span>5</span></div>
-        <div class="card"><div class="date">-- February 2027</div><h3>Results announced</h3><p>Official leaderboard per track, with per-variety breakdown.</p></div>
+        <div class="card"><div class="date"><span class="tba">Date TBA</span></div><h3>Results announced</h3><p>Official leaderboard with per-variety breakdown.</p></div>
       </li>
       <li class="milestone">
         <div class="marker"><span>6</span></div>
-        <div class="card"><div class="date">-- February 2027</div><h3>System description papers due</h3><p>Up to 4 pages plus unlimited references and appendices, through OpenReview.</p></div>
+        <div class="card"><div class="date"><span class="tba">Date TBA</span></div><h3>System description papers due</h3><p>Up to 4 pages plus unlimited references and appendices, through OpenReview.</p></div>
       </li>
       <li class="milestone">
         <div class="marker"><span>7</span></div>
-        <div class="card"><div class="date">-- February 2027</div><h3>Notification of acceptance</h3><p>Reviews by fellow participants, checked by an organizer.</p></div>
+        <div class="card"><div class="date"><span class="tba">Date TBA</span></div><h3>Notification of acceptance</h3><p>Reviews by fellow participants, checked by an organizer.</p></div>
       </li>
       <li class="milestone">
         <div class="marker"><span>8</span></div>
-        <div class="card"><div class="date">-- February 2027</div><h3>Camera-ready papers due</h3><p>Final versions for the AbjadNLP 2027 proceedings.</p></div>
+        <div class="card"><div class="date"><span class="tba">Date TBA</span></div><h3>Camera-ready papers due</h3><p>Final versions for the AbjadNLP 2027 proceedings.</p></div>
       </li>
       <li class="milestone">
         <div class="marker finish"><span>9</span></div>
-        <div class="card"><div class="date"><span class="tba">Date TBA</span> · 2027</div><h3>AbjadNLP 2027 Workshop</h3><p>Presentation of the task overview and the participating systems. Venue <span class="tba">TBA</span>.</p></div>
+        <div class="card"><div class="date">9–14 May 2027</div><h3>AbjadNLP 2027 Workshop</h3><p>Presentation of the task overview and the participating systems. Macau.</p></div>
       </li>
     </ol>
   </div>
@@ -912,7 +905,7 @@ TQA-00003,B</code></pre>
       </div>
     </div>
     <div class="tiny">
-      <span>© <span data-year>2026</span> TariQA organizers. Page maintained by <span class="tba">maintainer</span>, hosted on GitHub Pages.</span>
+      <span>© <span data-year>2026</span> TariQA organizers. Page maintained by Jihad Rbaiti, hosted on GitHub Pages.</span>
       <span>Road signs and zellige drawn in SVG for this site.</span>
     </div>
   </div>

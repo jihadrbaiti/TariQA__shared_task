@@ -1,5 +1,5 @@
 /* ==========================================================================
-   TariqQA site script
+   TariQA site script
    - wires links from config.js
    - mobile navigation, theme toggle, active section highlighting
    - scroll reveal
